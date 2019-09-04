@@ -9,6 +9,8 @@
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
     <Grid>
-
+        <local:PomodoroStateButton Height="96" Width="96" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="CadetBlue"
+                                   x:Name="Button"
+                                   Click="OnClick"/>
     </Grid>
 </Page>

@@ -22,9 +22,39 @@ namespace PomodoroButtonDemo
     /// </summary>
     public sealed partial class MainPage : Page
     {
+        private int _index;
         public MainPage()
         {
             this.InitializeComponent();
+        }
+
+        private void OnClick(object sender, RoutedEventArgs e)
+        {
+            _index++;
+
+            switch (_index % 4)
+            {
+                case 0:
+                    Button.IsInPomodoro = true;
+                    Button.IsTimerInProgress = false;
+                    break;
+                case 1:
+                    Button.IsInPomodoro = true;
+                    Button.IsTimerInProgress = true;
+                    break;
+                case 2:
+                    Button.IsInPomodoro = false;
+                    Button.IsTimerInProgress = false;
+                    break;
+                case 3:
+                    Button.IsInPomodoro = false;
+                    Button.IsTimerInProgress = true;
+                    break;
+
+                default:
+                    break;
+
+            }
         }
     }
 }
