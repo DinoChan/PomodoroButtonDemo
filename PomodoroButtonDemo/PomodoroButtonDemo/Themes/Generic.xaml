@@ -7,14 +7,18 @@
 
     <Style TargetType="local:PomodoroStateButton">
         <Setter Property="Background" Value="Transparent"/>
-        <Setter Property="BorderBrush" Value="CadetBlue"/>
         <Setter Property="Foreground" Value="Transparent"/>
+        <Setter Property="BorderBrush" Value="{ThemeResource SystemBaseHighColor}"/>
+        <Setter Property="BorderThickness" Value="1"/>
+        
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="local:PomodoroStateButton">
                     <Border Background="{TemplateBinding Background}"
-                            BorderBrush="{TemplateBinding BorderBrush}"
-                            BorderThickness="{TemplateBinding BorderThickness}">
+                          
+                            BorderThickness="{TemplateBinding BorderThickness}"
+                            Padding="{TemplateBinding Padding}"
+                            x:Name="RootGrid">
                         <VisualStateManager.VisualStateGroups>
                             <VisualStateGroup x:Name="CommonStates">
                                 <VisualStateGroup.Transitions>
@@ -25,19 +29,33 @@
                                     </VisualTransition>
                                 </VisualStateGroup.Transitions>
                                 <VisualState x:Name="Normal" />
-                                <VisualState x:Name="PointerOver">
-                                    <!--<VisualState.Setters>
-                                        <Setter Target="PointOverElement.(UIElement.Opacity)"
-                                                Value="1" />
-                                    </VisualState.Setters>-->
+                                <!--<VisualState x:Name="PointerOver">
+                                    <VisualState.Setters>
+                                        <Setter Target="RootGrid.(RevealBrush.State)" Value="PointerOver"/>
+                                        <Setter Target="RootGrid.Background" Value="{ThemeResource SystemChromeLowColor}"/>
+                                        <Setter Target="RootGrid.BorderBrush" Value="{ThemeResource InkToolbarButtonBorderBrushPointerOver}"/>
+                                        <Setter Target="Foreground" Value="{ThemeResource InkToolbarButtonBorderBrushPointerOver}"/>
+                                    </VisualState.Setters>
                                 </VisualState>
+
                                 <VisualState x:Name="Pressed">
-                                    <!--<VisualState.Setters>
-                                        <Setter Target="PressElement.(UIElement.Opacity)"
-                                                Value="1" />
-                                    </VisualState.Setters>-->
+                                    <VisualState.Setters>
+                                        <Setter Target="RootGrid.(RevealBrush.State)" Value="Pressed"/>
+                                        <Setter Target="RootGrid.Background" Value="{ThemeResource SystemChromeLowColor}"/>
+                                        <Setter Target="RootGrid.BorderBrush" Value="{ThemeResource SystemControlForegroundBaseHighBrush}"/>
+                                    </VisualState.Setters>
+                                    <Storyboard>
+
+                                    </Storyboard>
+                                </VisualState>-->
+
+                                <VisualState x:Name="Disabled">
+                                    <VisualState.Setters>
+                                        <Setter Target="RootGrid.Background" Value="{ThemeResource ButtonRevealBackgroundDisabled}" />
+                                        <Setter Target="RootGrid.BorderBrush" Value="{ThemeResource ButtonRevealBorderBrushDisabled}" />
+                                        <Setter Target="RootGrid.Foreground" Value="{ThemeResource ButtonForegroundDisabled}" />
+                                    </VisualState.Setters>
                                 </VisualState>
-                                <VisualState x:Name="Disabled" />
                             </VisualStateGroup>
 
                             <VisualStateGroup x:Name="ProgressStates">
@@ -77,7 +95,7 @@
                                     <VisualState.Setters>
                                         <Setter Target="ProgressToPointCollectionBridge.Progress"
                                                 Value="1" />
-                                        <Setter Target="ShapeCompositeTransform.Rotation" Value="90"/>
+                                        <Setter Target="ShapeCompositeTransform.Rotation" Value="180"/>
                                     </VisualState.Setters>
                                 </VisualState>
                             </VisualStateGroup>
@@ -113,15 +131,45 @@
                             <Grid.RenderTransform>
                                 <CompositeTransform x:Name="ShapeCompositeTransform" CenterX=".5" CenterY=".5"/>
                             </Grid.RenderTransform>
-                            <Polygon Points="{Binding Source={StaticResource ProgressToPointCollectionBridge},Path=Points}"
+                            <local:OutlinePanel>
+                                <Polygon Points="{Binding Source={StaticResource ProgressToPointCollectionBridge},Path=Points}"
                                      Fill="{TemplateBinding Foreground}"
                                      Stroke="{TemplateBinding BorderBrush}"
                                      StrokeThickness="7"
                                      Stretch="None"
-                                     StrokeEndLineCap="Round">
-                            </Polygon>
+                                     StrokeEndLineCap="Round"
+                                         Opacity="0.1"
+                                     />
+
+                            </local:OutlinePanel>
                         </Grid>
                     </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+
+    <Style TargetType="local:OutlinePanel">
+        <Setter Property="IsTabStop" Value="False" />
+        <Setter Property="HorizontalAlignment" Value="Stretch"/>
+        <Setter Property="HorizontalContentAlignment" Value="Left"/>
+        <Setter Property="VerticalAlignment" Value="Stretch"/>
+        <Setter Property="VerticalContentAlignment" Value="Stretch"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="local:OutlinePanel">
+                    <Grid Background="{TemplateBinding Background}"
+                          BorderBrush="{TemplateBinding BorderBrush}"
+                          BorderThickness="{TemplateBinding BorderThickness}"
+                          HorizontalAlignment="{TemplateBinding HorizontalAlignment}"
+                          VerticalAlignment="{TemplateBinding VerticalAlignment}">
+                        <Border x:Name="OutlineBorder" 
+                                HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                VerticalAlignment="{TemplateBinding VerticalContentAlignment}" />
+                        <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                          VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                    </Grid>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
