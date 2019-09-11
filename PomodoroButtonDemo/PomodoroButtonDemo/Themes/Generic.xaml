@@ -1,53 +1,267 @@
 <ResourceDictionary
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:local="using:PomodoroButtonDemo">
+    xmlns:interactivity="using:Microsoft.Xaml.Interactivity"
+    xmlns:behaviors="using:Microsoft.Toolkit.Uwp.UI.Animations.Behaviors"
+    xmlns:local="using:PomodoroButtonDemo"
+    xmlns:controls="using:Microsoft.Toolkit.Uwp.UI.Controls">
+
+    <Style TargetType="local:OutlinePanel">
+        <Setter Property="IsTabStop" Value="False" />
+        <Setter Property="HorizontalAlignment" Value="Stretch"/>
+        <Setter Property="VerticalAlignment" Value="Stretch"/>
+        <Setter Property="IsHitTestVisible" Value="False"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="local:OutlinePanel">
+                    <Grid>
+                        <VisualStateManager.VisualStateGroups>
+                            <VisualStateGroup x:Name="CommonStates">
+                                <VisualStateGroup.Transitions>
+                                    <VisualTransition From="Normal" To="PointerOver" >
+                                        <Storyboard>
+                                            <DoubleAnimation Storyboard.TargetName="OutlineBorder" Storyboard.TargetProperty="Opacity" To="0" Duration="0:0:0.8">
+                                                <DoubleAnimation.EasingFunction>
+                                                    <CubicEase EasingMode="EaseOut"/>
+                                                </DoubleAnimation.EasingFunction>
+                                            </DoubleAnimation>
+
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="OutlineBorder" Storyboard.TargetProperty="(UIElement.Visibility)">
+                                                <DiscreteObjectKeyFrame KeyTime="00:00:00" Value="Visible"/>
+                                                <DiscreteObjectKeyFrame KeyTime="00:00:0.8" Value="Collapsed"/>
+                                            </ObjectAnimationUsingKeyFrames>
+                                        </Storyboard>
+                                    </VisualTransition>
+                                    <VisualTransition To="Normal" >
+                                        <Storyboard>
+                                            <DoubleAnimation Storyboard.TargetName="OutlineBorder" Storyboard.TargetProperty="Opacity" To="0.3" Duration="0:0:1.5">
+                                                <DoubleAnimation.EasingFunction>
+                                                    <CubicEase EasingMode="EaseOut"/>
+                                                </DoubleAnimation.EasingFunction>
+                                            </DoubleAnimation>
+
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="OutlineBorder" Storyboard.TargetProperty="(UIElement.Visibility)">
+                                                <DiscreteObjectKeyFrame KeyTime="00:00:00" Value="Visible"/>
+                                                <DiscreteObjectKeyFrame KeyTime="00:00:0.8" Value="Collapsed"/>
+                                            </ObjectAnimationUsingKeyFrames>
+                                        </Storyboard>
+                                    </VisualTransition>
+                                </VisualStateGroup.Transitions>
+                                <VisualState x:Name="Normal" >
+                                    <VisualState.Setters>
+                                        <Setter Target="Scale.ScaleX" Value="1"/>
+                                        <Setter Target="Scale.ScaleY" Value="1"/>
+                                        <Setter Target="OutlineBorder.Opacity" Value="0.3"/>
+                                        <Setter Target="OutlineBorder.Visibility" Value="Collapsed"/>
+                                    </VisualState.Setters>
+                                </VisualState>
+                                <VisualState x:Name="PointerOver">
+                                    <VisualState.Setters>
+                                        <Setter Target="Scale.ScaleX" Value="2.5"/>
+                                        <Setter Target="Scale.ScaleY" Value="2.5"/>
+                                        <Setter Target="OutlineBorder.Opacity" Value="0"/>
+                                        <Setter Target="OutlineBorder.Visibility" Value="Visible"/>
+                                    </VisualState.Setters>
+                                </VisualState>
+                            </VisualStateGroup>
+                        </VisualStateManager.VisualStateGroups>
+                        <Border x:Name="OutlineBorder" 
+                                Visibility="Collapsed" 
+                                Opacity="0.5"
+                                HorizontalAlignment="{TemplateBinding HorizontalAlignment}"
+                                VerticalAlignment="{TemplateBinding HorizontalAlignment}" >
+                            <interactivity:Interaction.Behaviors>
+                                <behaviors:Scale x:Name="Scale"
+                                                    ScaleX="1"
+                                                    ScaleY="1"
+                                                    CenterX="12"
+                                                    CenterY="12"
+                                                    Duration="800"
+                                                    Delay="0"
+                                                    EasingType="Cubic"
+                                                    EasingMode="EaseOut"
+                                                    AutomaticallyStart="True"/>
+                            </interactivity:Interaction.Behaviors>
+                        </Border>
+                    </Grid>
+
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
 
 
+    <Style TargetType="local:InsetPanel" >
+        <Setter Property="IsTabStop" Value="False" />
+        <Setter Property="HorizontalAlignment" Value="Stretch"/>
+        <Setter Property="VerticalAlignment" Value="Stretch"/>
+        <Setter Property="IsHitTestVisible" Value="False"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="local:InsetPanel">
+                    <Grid>
+                        <VisualStateManager.VisualStateGroups>
+                            <VisualStateGroup x:Name="CommonStates">
+                                <VisualStateGroup.Transitions>
+                                    <VisualTransition From="Normal" To="PointerOver" GeneratedDuration="0:0:0.5">
+                                        <VisualTransition.GeneratedEasingFunction>
+                                            <CubicEase EasingMode="EaseOut" />
+                                        </VisualTransition.GeneratedEasingFunction>
+                                    </VisualTransition>
+                                    <VisualTransition To="Normal" GeneratedDuration="0:0:0.5">
+                                        <VisualTransition.GeneratedEasingFunction>
+                                            <CubicEase EasingMode="EaseIn" />
+                                        </VisualTransition.GeneratedEasingFunction>
+                                    </VisualTransition>
+                                </VisualStateGroup.Transitions>
+                                <VisualState x:Name="Normal" >
+                                    <VisualState.Setters>
+                                        <Setter Target="OutlineBorder.Opacity" Value="0"/>
+                                    </VisualState.Setters>
+                                </VisualState>
+                                <VisualState x:Name="PointerOver">
+                                    <VisualState.Setters>
+                                        <Setter Target="OutlineBorder.Opacity" Value="1"/>
+                                    </VisualState.Setters>
+                                </VisualState>
+                                <VisualState x:Name="Pressed">
+                                    <VisualState.Setters>
+                                        <Setter Target="OutlineBorder.Opacity" Value="0.8"/>
+                                    </VisualState.Setters>
+                                </VisualState>
+                            </VisualStateGroup>
+                        </VisualStateManager.VisualStateGroups>
+                        <Border x:Name="OutlineBorder" />
+
+
+                    </Grid>
+
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+
+    <Style TargetType="local:InsetDropShadowPanel">
+        <Setter Property="IsTabStop"
+                Value="False" />
+        <Setter Property="HorizontalAlignment" Value="Stretch"/>
+        <Setter Property="HorizontalContentAlignment" Value="Left"/>
+        <Setter Property="VerticalAlignment" Value="Stretch"/>
+        <Setter Property="VerticalContentAlignment" Value="Stretch"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="local:InsetDropShadowPanel">
+                    <Grid Background="{TemplateBinding Background}"
+                          BorderBrush="{TemplateBinding BorderBrush}"
+                          BorderThickness="{TemplateBinding BorderThickness}"
+                          HorizontalAlignment="{TemplateBinding HorizontalAlignment}"
+                          VerticalAlignment="{TemplateBinding VerticalAlignment}">
+                        <VisualStateManager.VisualStateGroups>
+                            <VisualStateGroup x:Name="CommonStates">
+                                <VisualStateGroup.Transitions>
+                                    <VisualTransition From="Normal" To="PointerOver" GeneratedDuration="0:0:0.5">
+                                        <!--<VisualTransition.GeneratedEasingFunction>
+                                            <CubicEase EasingMode="EaseOut" />
+                                        </VisualTransition.GeneratedEasingFunction>-->
+                                    </VisualTransition>
+                                    <VisualTransition To="Normal" GeneratedDuration="0:0:0.5">
+                                        <!--<VisualTransition.GeneratedEasingFunction>
+                                            <CubicEase EasingMode="EaseIn" />
+                                        </VisualTransition.GeneratedEasingFunction>-->
+                                    </VisualTransition>
+                                </VisualStateGroup.Transitions>
+                                <VisualState x:Name="Normal" >
+                                   
+                                </VisualState>
+                                <VisualState x:Name="PointerOver">
+                                    <VisualState.Setters>
+                                        <Setter Target="Shadow.Color" Value="White"/>
+                                        <!--<Setter Target="Shadow.OffsetX" Value="0"/>
+                                        <Setter Target="Shadow.OffsetY" Value="0"/>-->
+                                    </VisualState.Setters>
+                                </VisualState>
+                                <VisualState x:Name="Pressed">
+                                    <VisualState.Setters>
+                                        <!--<Setter Target="Shadow.Color" Value="White"/>-->
+                                        <Setter Target="Shadow.OffsetX" Value="0"/>
+                                        <Setter Target="Shadow.OffsetY" Value="0"/>
+                                        <Setter Target="Shadow.Opacity" Value="0.8"/>
+                                    </VisualState.Setters>
+                                </VisualState>
+                            </VisualStateGroup>
+                        </VisualStateManager.VisualStateGroups>
+                        <controls:DropShadowPanel
+                            x:Name="Shadow"
+                            Content="{TemplateBinding Content}"
+                            Color="{TemplateBinding Color}"
+                            ShadowOpacity="{TemplateBinding ShadowOpacity}"
+                            BlurRadius="{TemplateBinding BlurRadius}"
+                             OffsetX="{TemplateBinding OffsetX}"
+                            OffsetY="{TemplateBinding OffsetY}"
+                            OffsetZ="{TemplateBinding OffsetZ}"/>
+
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
 
     <Style TargetType="local:PomodoroStateButton">
         <Setter Property="Background" Value="Transparent"/>
         <Setter Property="Foreground" Value="Transparent"/>
         <Setter Property="BorderBrush" Value="{ThemeResource SystemBaseHighColor}"/>
-        <Setter Property="BorderThickness" Value="1"/>
-        
+        <Setter Property="BorderThickness" Value="0"/>
+        <Setter Property="ShadowColor" Value="Black"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="local:PomodoroStateButton">
                     <Border Background="{TemplateBinding Background}"
-                          
                             BorderThickness="{TemplateBinding BorderThickness}"
                             Padding="{TemplateBinding Padding}"
                             x:Name="RootGrid">
                         <VisualStateManager.VisualStateGroups>
                             <VisualStateGroup x:Name="CommonStates">
-                                <VisualStateGroup.Transitions>
-                                    <VisualTransition GeneratedDuration="0:0:3">
-                                        <VisualTransition.GeneratedEasingFunction>
-                                            <CubicEase EasingMode="EaseOut" />
-                                        </VisualTransition.GeneratedEasingFunction>
+                                <!--<VisualStateGroup.Transitions>
+                                    <VisualTransition From="Normal" To="PointerOver" >
+                                        <Storyboard>
+                                            <DoubleAnimation Storyboard.TargetName="Shadow" Storyboard.TargetProperty="ShadowOpacity" To="0" Duration="0:0:0.5">
+                                                <DoubleAnimation.EasingFunction>
+                                                    <CubicEase EasingMode="EaseOut"/>
+                                                </DoubleAnimation.EasingFunction>
+                                            </DoubleAnimation>
+                                        </Storyboard>
                                     </VisualTransition>
-                                </VisualStateGroup.Transitions>
-                                <VisualState x:Name="Normal" />
-                                <!--<VisualState x:Name="PointerOver">
+                                    <VisualTransition To="Normal" >
+                                        <Storyboard>
+                                            <DoubleAnimation Storyboard.TargetName="Shadow" Storyboard.TargetProperty="ShadowOpacity" To="1" Duration="0:0:0.5">
+                                                <DoubleAnimation.EasingFunction>
+                                                    <CubicEase EasingMode="EaseOut"/>
+                                                </DoubleAnimation.EasingFunction>
+                                            </DoubleAnimation>
+                                        </Storyboard>
+                                    </VisualTransition>
+                                </VisualStateGroup.Transitions>-->
+                                <VisualState x:Name="Normal" >
                                     <VisualState.Setters>
-                                        <Setter Target="RootGrid.(RevealBrush.State)" Value="PointerOver"/>
-                                        <Setter Target="RootGrid.Background" Value="{ThemeResource SystemChromeLowColor}"/>
-                                        <Setter Target="RootGrid.BorderBrush" Value="{ThemeResource InkToolbarButtonBorderBrushPointerOver}"/>
-                                        <Setter Target="Foreground" Value="{ThemeResource InkToolbarButtonBorderBrushPointerOver}"/>
+                                        <Setter Target="Outline.State" Value="Normal"/>
+                                    </VisualState.Setters>
+                                </VisualState>
+                                <VisualState x:Name="PointerOver">
+                                    <VisualState.Setters>
+                                        <Setter Target="Outline.State" Value="PointerOver"/>
+                                        <Setter Target="Shadow.State" Value="PointerOver"/>
+                                        <!--<Setter Target="Shadow.ShadowOpacity" Value="0"/>-->
                                     </VisualState.Setters>
                                 </VisualState>
 
                                 <VisualState x:Name="Pressed">
                                     <VisualState.Setters>
-                                        <Setter Target="RootGrid.(RevealBrush.State)" Value="Pressed"/>
-                                        <Setter Target="RootGrid.Background" Value="{ThemeResource SystemChromeLowColor}"/>
-                                        <Setter Target="RootGrid.BorderBrush" Value="{ThemeResource SystemControlForegroundBaseHighBrush}"/>
+                                        <Setter Target="Outline.State" Value="Pressed"/>
+                                        <Setter Target="Shadow.State" Value="Pressed"/>
+                                        <!--<Setter Target="Shadow.ShadowOpacity" Value="0"/>-->
                                     </VisualState.Setters>
-                                    <Storyboard>
-
-                                    </Storyboard>
-                                </VisualState>-->
+                                </VisualState>
 
                                 <VisualState x:Name="Disabled">
                                     <VisualState.Setters>
@@ -72,7 +286,7 @@
                                                     <CubicEase EasingMode="EaseOut"/>
                                                 </DoubleAnimation.EasingFunction>
                                             </DoubleAnimation>
-                                                             
+
                                         </Storyboard>
                                     </VisualTransition>
                                     <VisualTransition From="Busy" To="Idle">
@@ -110,10 +324,6 @@
                                 </VisualStateGroup.Transitions>
                                 <VisualState x:Name="Inwork" />
                                 <VisualState x:Name="Break">
-                                    <!--<VisualState.Setters>
-                                        <Setter Target="PointOverElement.(UIElement.Opacity)"
-                                                Value="1" />
-                                    </VisualState.Setters>-->
                                 </VisualState>
                             </VisualStateGroup>
 
@@ -121,27 +331,37 @@
                         <Border.Resources>
                             <local:ProgressToPointCollectionBridge x:Name="ProgressToPointCollectionBridge"
                                            Progress="0">
-                                <PointCollection>83.00,48.00 81.21,49.27 79.42,50.55 77.64,51.82 75.85,53.09 74.06,54.36 72.27,55.64 70.48,56.91 68.70,58.18 66.91,59.45 65.12,60.73 63.33,62.00 61.55,63.27 59.76,64.55 57.97,65.82 56.18,67.09 54.39,68.36 52.61,69.64 50.82,70.91 49.03,72.18 47.24,73.45 45.45,74.73 43.67,76.00 41.88,77.27 40.09,78.55 38.30,79.82 36.52,81.09 34.73,82.36 32.94,83.64 31.15,84.91 29.36,86.18 27.58,87.45 25.79,88.73 24.00,90.00 24.00,87.45 24.00,84.91 24.00,82.36 24.00,79.82 24.00,77.27 24.00,74.73 24.00,72.18 24.00,69.64 24.00,67.09 24.00,64.55 24.00,62.00 24.00,59.45 24.00,56.91 24.00,54.36 24.00,51.82 24.00,49.27 24.00,46.73 24.00,44.18 24.00,41.64 24.00,39.09 24.00,36.55 24.00,34.00 24.00,31.45 24.00,28.91 24.00,26.36 24.00,23.82 24.00,21.27 24.00,18.73 24.00,16.18 24.00,13.64 24.00,11.09 24.00,8.55 24.00,6.00 25.74,7.24 27.47,8.47 29.21,9.71 30.94,10.94 32.68,12.18 34.41,13.41 36.15,14.65 37.88,15.88 39.62,17.12 41.35,18.35 43.09,19.59 44.82,20.82 46.56,22.06 48.29,23.29 50.03,24.53 51.76,25.76 53.50,27.00 55.24,28.24 56.97,29.47 58.71,30.71 60.44,31.94 62.18,33.18 63.91,34.41 65.65,35.65 67.38,36.88 69.12,38.12 70.85,39.35 72.59,40.59 74.32,41.82 76.06,43.06 77.79,44.29 79.53,45.53 81.26,46.76</PointCollection>
-                                <PointCollection>85.00,48.00 84.93,50.32 84.71,52.64 84.34,54.93 83.84,57.20 83.19,59.43 82.40,61.62 81.48,63.75 80.42,65.82 79.24,67.83 77.93,69.75 76.51,71.58 74.97,73.33 73.33,74.97 71.58,76.51 69.75,77.93 67.83,79.24 65.82,80.42 63.75,81.48 61.62,82.40 59.43,83.19 57.20,83.84 54.93,84.34 52.64,84.71 50.32,84.93 48.00,85.00 45.68,84.93 43.36,84.71 41.07,84.34 38.80,83.84 36.57,83.19 34.38,82.40 32.25,81.48 30.18,80.42 28.17,79.24 26.25,77.93 24.42,76.51 22.67,74.97 21.03,73.33 19.49,71.58 18.07,69.75 16.76,67.83 15.58,65.82 14.52,63.75 13.60,61.62 12.81,59.43 12.16,57.20 11.66,54.93 11.29,52.64 11.07,50.32 11.00,48.00 11.07,45.68 11.29,43.36 11.66,41.07 12.16,38.80 12.81,36.57 13.60,34.38 14.52,32.25 15.58,30.18 16.76,28.17 18.07,26.25 19.49,24.42 21.03,22.67 22.67,21.03 24.42,19.49 26.25,18.07 28.17,16.76 30.18,15.58 32.25,14.52 34.38,13.60 36.57,12.81 38.80,12.16 41.07,11.66 43.36,11.29 45.68,11.07 48.00,11.00 50.32,11.07 52.64,11.29 54.93,11.66 57.20,12.16 59.43,12.81 61.62,13.60 63.75,14.52 65.82,15.58 67.83,16.76 69.75,18.07 71.58,19.49 73.33,21.03 74.97,22.67 76.51,24.42 77.93,26.25 79.24,28.17 80.42,30.18 81.48,32.25 82.40,34.38 83.19,36.57 83.84,38.80 84.34,41.07 84.71,43.36 84.93,45.68</PointCollection>
-                                <PointCollection>80,80 80,80 80,80 80,80 80,80 80,80 80,80 80,80 80,80 80,80 80,80 80,80 80,80 80,80 80,80 80,80 80,80 80,80 80,80 80,80 80,80 80,80 80,80 80,80 80,80 16,80 16,80 16,80 16,80 16,80 16,80 16,80 16,80 16,80 16,80 16,80 16,80 16,80 16,80 16,80 16,80 16,80 16,80 16,80 16,80 16,80 16,80 16,80 16,80 16,80 16,16 16,16 16,16 16,16 16,16 16,16 16,16 16,16 16,16 16,16 16,16 16,16 16,16 16,16 16,16 16,16 16,16 16,16 16,16 16,16 16,16 16,16 16,16 16,16 16,16 80,16 80,16 80,16 80,16 80,16 80,16 80,16 80,16 80,16 80,16 80,16 80,16 80,16 80,16 80,16 80,16 80,16 80,16 80,16 80,16 80,16 80,16 80,16 80,16 80,16</PointCollection>
+                                <PointCollection>21.00,12.00 20.55,12.30 20.09,12.61 19.64,12.91 19.18,13.21 18.73,13.52 18.27,13.82 17.82,14.12 17.36,14.42 16.91,14.73 16.45,15.03 16.00,15.33 15.55,15.64 15.09,15.94 14.64,16.24 14.18,16.55 13.73,16.85 13.27,17.15 12.82,17.45 12.36,17.76 11.91,18.06 11.45,18.36 11.00,18.67 10.55,18.97 10.09,19.27 9.64,19.58 9.18,19.88 8.73,20.18 8.27,20.48 7.82,20.79 7.36,21.09 6.91,21.39 6.45,21.70 6.00,22.00 6.00,21.39 6.00,20.79 6.00,20.18 6.00,19.58 6.00,18.97 6.00,18.36 6.00,17.76 6.00,17.15 6.00,16.55 6.00,15.94 6.00,15.33 6.00,14.73 6.00,14.12 6.00,13.52 6.00,12.91 6.00,12.30 6.00,11.70 6.00,11.09 6.00,10.48 6.00,9.88 6.00,9.27 6.00,8.67 6.00,8.06 6.00,7.45 6.00,6.85 6.00,6.24 6.00,5.64 6.00,5.03 6.00,4.42 6.00,3.82 6.00,3.21 6.00,2.61 6.00,2.00 6.44,2.29 6.88,2.59 7.32,2.88 7.76,3.18 8.21,3.47 8.65,3.76 9.09,4.06 9.53,4.35 9.97,4.65 10.41,4.94 10.85,5.24 11.29,5.53 11.74,5.82 12.18,6.12 12.62,6.41 13.06,6.71 13.50,7.00 13.94,7.29 14.38,7.59 14.82,7.88 15.26,8.18 15.71,8.47 16.15,8.76 16.59,9.06 17.03,9.35 17.47,9.65 17.91,9.94 18.35,10.24 18.79,10.53 19.24,10.82 19.68,11.12 20.12,11.41 20.56,11.71</PointCollection>
+                                <PointCollection>22.00,12.00 21.98,12.63 21.92,13.25 21.82,13.87 21.69,14.49 21.51,15.09 21.30,15.68 21.05,16.26 20.76,16.82 20.44,17.36 20.09,17.88 19.71,18.37 19.29,18.85 18.85,19.29 18.37,19.71 17.88,20.09 17.36,20.44 16.82,20.76 16.26,21.05 15.68,21.30 15.09,21.51 14.49,21.69 13.87,21.82 13.25,21.92 12.63,21.98 12.00,22.00 11.37,21.98 10.75,21.92 10.13,21.82 9.51,21.69 8.91,21.51 8.32,21.30 7.74,21.05 7.18,20.76 6.64,20.44 6.12,20.09 5.63,19.71 5.15,19.29 4.71,18.85 4.29,18.37 3.91,17.88 3.56,17.36 3.24,16.82 2.95,16.26 2.70,15.68 2.49,15.09 2.31,14.49 2.18,13.87 2.08,13.25 2.02,12.63 2.00,12.00 2.02,11.37 2.08,10.75 2.18,10.13 2.31,9.51 2.49,8.91 2.70,8.32 2.95,7.74 3.24,7.18 3.56,6.64 3.91,6.12 4.29,5.63 4.71,5.15 5.15,4.71 5.63,4.29 6.12,3.91 6.64,3.56 7.18,3.24 7.74,2.95 8.32,2.70 8.91,2.49 9.51,2.31 10.13,2.18 10.75,2.08 11.37,2.02 12.00,2.00 12.63,2.02 13.25,2.08 13.87,2.18 14.49,2.31 15.09,2.49 15.68,2.70 16.26,2.95 16.82,3.24 17.36,3.56 17.88,3.91 18.37,4.29 18.85,4.71 19.29,5.15 19.71,5.63 20.09,6.12 20.44,6.64 20.76,7.18 21.05,7.74 21.30,8.32 21.51,8.91 21.69,9.51 21.82,10.13 21.92,10.75 21.98,11.37</PointCollection>
+                                <PointCollection>20,20 20,20 20,20 20,20 20,20 20,20 20,20 20,20 20,20 20,20 20,20 20,20 20,20 20,20 20,20 20,20 20,20 20,20 20,20 20,20 20,20 20,20 20,20 20,20 20,20 4,20 4,20 4,20 4,20 4,20 4,20 4,20 4,20 4,20 4,20 4,20 4,20 4,20 4,20 4,20 4,20 4,20 4,20 4,20 4,20 4,20 4,20 4,20 4,20 4,20 4,4 4,4 4,4 4,4 4,4 4,4 4,4 4,4 4,4 4,4 4,4 4,4 4,4 4,4 4,4 4,4 4,4 4,4 4,4 4,4 4,4 4,4 4,4 4,4 4,4 20,4 20,4 20,4 20,4 20,4 20,4 20,4 20,4 20,4 20,4 20,4 20,4 20,4 20,4 20,4 20,4 20,4 20,4 20,4 20,4 20,4 20,4 20,4 20,4 20,4</PointCollection>
                             </local:ProgressToPointCollectionBridge>
 
                         </Border.Resources>
-                        <Grid Height="96" Width="96" RenderTransformOrigin=".5,.5">
-                            <Grid.RenderTransform>
-                                <CompositeTransform x:Name="ShapeCompositeTransform" CenterX=".5" CenterY=".5"/>
-                            </Grid.RenderTransform>
-                            <local:OutlinePanel>
-                                <Polygon Points="{Binding Source={StaticResource ProgressToPointCollectionBridge},Path=Points}"
+                        <Grid>
+
+
+                            <Grid Height="24" Width="24" RenderTransformOrigin=".5,.5">
+                                <Grid.RenderTransform>
+                                    <CompositeTransform x:Name="ShapeCompositeTransform"/>
+                                </Grid.RenderTransform>
+
+
+                                <local:InsetDropShadowPanel  BlurRadius="8" 
+                                                           ShadowOpacity="1" 
+                                                           x:Name="Shadow" 
+                                                           Color="{TemplateBinding ShadowColor}">
+                                    <Polygon Points="{Binding Source={StaticResource ProgressToPointCollectionBridge},Path=Points}"
                                      Fill="{TemplateBinding Foreground}"
                                      Stroke="{TemplateBinding BorderBrush}"
-                                     StrokeThickness="7"
+                                     StrokeThickness="2"
                                      Stretch="None"
                                      StrokeEndLineCap="Round"
-                                         Opacity="0.1"
-                                     />
+                                     x:Name="Shape"/>
+                                </local:InsetDropShadowPanel>
+                                <local:InsetPanel RelativeElement="{Binding ElementName=Shape}" x:Name="Inset" Visibility="Collapsed"/>
+                                <local:OutlinePanel RelativeElement="{Binding ElementName=Shape}" x:Name="Outline" />
 
-                            </local:OutlinePanel>
+                            </Grid>
                         </Grid>
                     </Border>
                 </ControlTemplate>
@@ -150,28 +370,5 @@
     </Style>
 
 
-    <Style TargetType="local:OutlinePanel">
-        <Setter Property="IsTabStop" Value="False" />
-        <Setter Property="HorizontalAlignment" Value="Stretch"/>
-        <Setter Property="HorizontalContentAlignment" Value="Left"/>
-        <Setter Property="VerticalAlignment" Value="Stretch"/>
-        <Setter Property="VerticalContentAlignment" Value="Stretch"/>
-        <Setter Property="Template">
-            <Setter.Value>
-                <ControlTemplate TargetType="local:OutlinePanel">
-                    <Grid Background="{TemplateBinding Background}"
-                          BorderBrush="{TemplateBinding BorderBrush}"
-                          BorderThickness="{TemplateBinding BorderThickness}"
-                          HorizontalAlignment="{TemplateBinding HorizontalAlignment}"
-                          VerticalAlignment="{TemplateBinding VerticalAlignment}">
-                        <Border x:Name="OutlineBorder" 
-                                HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
-                                VerticalAlignment="{TemplateBinding VerticalContentAlignment}" />
-                        <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
-                                          VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
-                    </Grid>
-                </ControlTemplate>
-            </Setter.Value>
-        </Setter>
-    </Style>
+
 </ResourceDictionary>

@@ -36,21 +36,21 @@ namespace PomodoroButtonDemo
 
         private void OnClick(object sender, RoutedEventArgs e)
         {
-            var brush = EE.GetAlphaMask();
+            //var brush = EE.GetAlphaMask();
             _index++;
 
-            var _compositor = Window.Current.Compositor;
+            //var _compositor = Window.Current.Compositor;
 
 
 
-            var maskBrush = _compositor.CreateMaskBrush();
+            //var maskBrush = _compositor.CreateMaskBrush();
 
-            maskBrush.Mask = brush;
-            maskBrush.Source = _compositor.CreateColorBrush(Colors.White);
-            var _backgroundVisual = _compositor.CreateSpriteVisual();
-            _backgroundVisual.Brush = maskBrush;
-            _backgroundVisual.Size = new System.Numerics.Vector2(300);
-            ElementCompositionPreview.SetElementChildVisual(RR, _backgroundVisual);
+            //maskBrush.Mask = brush;
+            //maskBrush.Source = _compositor.CreateColorBrush(Colors.White);
+            //var _backgroundVisual = _compositor.CreateSpriteVisual();
+            //_backgroundVisual.Brush = maskBrush;
+            //_backgroundVisual.Size = new System.Numerics.Vector2(300);
+            //ElementCompositionPreview.SetElementChildVisual(RR, _backgroundVisual);
 
             switch (_index % 4)
             {

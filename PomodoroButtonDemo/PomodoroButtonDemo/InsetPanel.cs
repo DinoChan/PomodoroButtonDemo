@@ -1,30 +1,32 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Numerics;
 using System.Text;
 using System.Threading.Tasks;
 using Windows.UI;
 using Windows.UI.Composition;
-using Windows.UI.Xaml;
-using Windows.UI.Xaml.Automation.Peers;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Hosting;
 using Windows.UI.Xaml.Shapes;
 
 namespace PomodoroButtonDemo
 {
-    public class OutlinePanel : ButtonDecorator
+    public class InsetPanel : ButtonDecorator
     {
         private readonly Compositor _compositor;
         private CompositionMaskBrush _maskBrush;
+        private readonly DropShadow _dropShadow;
 
-        public OutlinePanel() : base()
+        public InsetPanel() : base()
         {
-            this.DefaultStyleKey = typeof(OutlinePanel);
+            this.DefaultStyleKey = typeof(InsetPanel);
             _compositor = ElementCompositionPreview.GetElementVisual(this).Compositor;
-            _maskBrush = _compositor.CreateMaskBrush();
-            Visual.Brush = _maskBrush;
+            _dropShadow = _compositor.CreateDropShadow();
+            _dropShadow.BlurRadius = 4;
+            _dropShadow.Color = Colors.White;
+            _dropShadow.Opacity = 0.7f;
+            Visual.Shadow = _dropShadow;
+            Visual.Scale = new System.Numerics.Vector3(0.91f);
         }
 
         protected override void UpdateOutlineMask()
@@ -32,14 +34,12 @@ namespace PomodoroButtonDemo
             if (RelativeElement is Shape shape)
             {
                 var mask = shape.GetAlphaMask();
-                _maskBrush.Mask = mask;
-                _maskBrush.Source = _compositor.CreateColorBrush(Colors.White);
+                _dropShadow.Mask = mask;
             }
             else if (RelativeElement is TextBlock textBlock)
             {
                 var mask = textBlock.GetAlphaMask();
-                _maskBrush.Mask = mask;
-                _maskBrush.Source = _compositor.CreateColorBrush(Colors.White);
+                _dropShadow.Mask = mask;
             }
         }
     }

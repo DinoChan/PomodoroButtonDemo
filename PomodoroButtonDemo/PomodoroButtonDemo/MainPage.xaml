@@ -5,197 +5,45 @@
     xmlns:local="using:PomodoroButtonDemo"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:controls="using:Microsoft.Toolkit.Uwp.UI.Controls"
     mc:Ignorable="d"
     RequestedTheme="Dark"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-    <Page.Resources>
-        <RevealBorderBrush x:Key="MyRevealBorderBrush" TargetTheme="Dark"  FallbackColor="Red" Color="Blue" AlwaysUseFallback="False"/>
-
-
-        <Style TargetType="Button" x:Key="ButtonRevealStyle">
-            <Setter Property="Background" Value="{ThemeResource ButtonRevealBackground}" />
-            <Setter Property="Foreground" Value="{ThemeResource ButtonForeground}" />
-            <Setter Property="BorderBrush" Value="{ThemeResource ButtonRevealBorderBrush}" />
-            <Setter Property="BorderThickness" Value="3" />
-            <Setter Property="Padding" Value="{ThemeResource ButtonPadding}" />
-            <Setter Property="HorizontalAlignment" Value="Left" />
-            <Setter Property="VerticalAlignment" Value="Center" />
-            <Setter Property="FontFamily" Value="{ThemeResource ContentControlThemeFontFamily}" />
-            <Setter Property="FontWeight" Value="Normal" />
-            <Setter Property="FontSize" Value="{ThemeResource ControlContentThemeFontSize}" />
-            <Setter Property="UseSystemFocusVisuals" Value="{StaticResource UseSystemFocusVisuals}" />
-            <Setter Property="FocusVisualMargin" Value="-3" />
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="Button">
-                        <Grid x:Name="RootGrid" Background="{TemplateBinding Background}" CornerRadius="{TemplateBinding CornerRadius}">
-
-                            <VisualStateManager.VisualStateGroups>
-                                <VisualStateGroup x:Name="CommonStates">
-                                    <VisualState x:Name="Normal">
-
-                                        <Storyboard>
-                                            <PointerUpThemeAnimation Storyboard.TargetName="RootGrid" />
-                                        </Storyboard>
-                                    </VisualState>
-
-                                    <VisualState x:Name="PointerOver">
-                                        <VisualState.Setters>
-                                            <Setter Target="RootGrid.(RevealBrush.State)" Value="PointerOver"/>
-                                            <Setter Target="ContentPresenter.Background" Value="{ThemeResource SystemChromeLowColor}"/>
-                                            <Setter Target="ContentPresenter.BorderBrush" Value="{ThemeResource InkToolbarButtonBorderBrushPointerOver}"/>
-                                        </VisualState.Setters>
-                                    </VisualState>
-
-                                    <VisualState x:Name="Pressed">
-                                        <VisualState.Setters>
-                                            <Setter Target="RootGrid.(RevealBrush.State)" Value="Pressed"/>
-                                            <Setter Target="ContentPresenter.Background" Value="{ThemeResource SystemChromeLowColor}"/>
-                                            <Setter Target="ContentPresenter.BorderBrush" Value="{ThemeResource SystemControlForegroundBaseHighBrush}"/>
-                                        </VisualState.Setters>
-                                        <Storyboard>
-
-                                        </Storyboard>
-                                    </VisualState>
-
-                                    <VisualState x:Name="Disabled">
-                                        <VisualState.Setters>
-                                            <Setter Target="RootGrid.Background" Value="{ThemeResource ButtonRevealBackgroundDisabled}" />
-                                            <Setter Target="ContentPresenter.BorderBrush" Value="{ThemeResource ButtonRevealBorderBrushDisabled}" />
-                                            <Setter Target="ContentPresenter.Foreground" Value="{ThemeResource ButtonForegroundDisabled}" />
-                                        </VisualState.Setters>
-                                    </VisualState>
-
-                                </VisualStateGroup>
-
-                            </VisualStateManager.VisualStateGroups>
-                            <ContentPresenter x:Name="ContentPresenter" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="{TemplateBinding CornerRadius}" Content="{TemplateBinding Content}" ContentTransitions="{TemplateBinding ContentTransitions}" ContentTemplate="{TemplateBinding ContentTemplate}" Padding="{TemplateBinding Padding}" HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}" VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}" AutomationProperties.AccessibilityView="Raw" />
-
-                        </Grid>
-
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
-        </Style>
-
-
-        <Style x:Key="InkToolbarCustomToggleButtonStyle1" BasedOn="{StaticResource InkToolbarCommonButtonStyle}" TargetType="InkToolbarCustomToggleButton">
-            <Setter Property="UseSystemFocusVisuals" Value="{StaticResource UseSystemFocusVisuals}"/>
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="InkToolbarCustomToggleButton">
-                        <Grid x:Name="RootElement" Background="{TemplateBinding Background}" Height="{ThemeResource InkToolbarButtonHeight}" Width="{ThemeResource InkToolbarButtonWidth}">
-                            <VisualStateManager.VisualStateGroups>
-                                <VisualStateGroup x:Name="CommonStates">
-                                    <VisualState x:Name="Normal"/>
-                                    <VisualState x:Name="PointerOver">
-                                        <VisualState.Setters>
-                                            <Setter Target="RootElement.(RevealBrush.State)" Value="PointerOver"/>
-                                            <Setter Target="RootElement.Background" Value="{ThemeResource SystemChromeLowColor}"/>
-                                            <Setter Target="Border.BorderBrush" Value="{ThemeResource InkToolbarButtonBorderBrushPointerOver}"/>
-                                            <Setter Target="Content.Foreground" Value="{ThemeResource InkToolbarButtonForegroundPointerOver}"/>
-                                        </VisualState.Setters>
-                                    </VisualState>
-                                    <VisualState x:Name="Pressed">
-                                        <VisualState.Setters>
-                                            <Setter Target="RootElement.(RevealBrush.State)" Value="Pressed"/>
-                                            <Setter Target="RootElement.Background" Value="{ThemeResource SystemChromeLowColor}"/>
-                                            <Setter Target="Border.BorderBrush" Value="{ThemeResource InkToolbarButtonBorderBrushPressed}"/>
-                                            <Setter Target="Content.Foreground" Value="{ThemeResource SystemControlForegroundBaseHighBrush}"/>
-                                        </VisualState.Setters>
-                                    </VisualState>
-                                    <VisualState x:Name="Disabled">
-                                        <VisualState.Setters>
-                                            <Setter Target="RootElement.Background" Value="{ThemeResource InkToolbarButtonBackgroundDisabled}"/>
-                                            <Setter Target="Border.BorderBrush" Value="{ThemeResource InkToolbarButtonBorderBrushDisabled}"/>
-                                            <Setter Target="Content.Foreground" Value="{ThemeResource InkToolbarButtonForegroundDisabled}"/>
-                                        </VisualState.Setters>
-                                    </VisualState>
-                                </VisualStateGroup>
-                                <VisualStateGroup x:Name="CheckStates">
-                                    <VisualState x:Name="Unchecked"/>
-                                    <VisualState x:Name="Indeterminate"/>
-                                    <VisualState x:Name="Checked">
-                                        <VisualState.Setters>
-                                            <Setter Target="SelectionAccent.Opacity" Value="1"/>
-                                        </VisualState.Setters>
-                                    </VisualState>
-                                </VisualStateGroup>
-                                <VisualStateGroup x:Name="FocusStates">
-                                    <VisualState x:Name="Focused"/>
-                                    <VisualState x:Name="Unfocused"/>
-                                    <VisualState x:Name="PointerFocused"/>
-                                </VisualStateGroup>
-                                <VisualStateGroup x:Name="FlowDirectionStates">
-                                    <VisualState x:Name="LeftToRight"/>
-                                    <VisualState x:Name="RightToLeft"/>
-                                </VisualStateGroup>
-                                <VisualStateGroup x:Name="ButtonFlyoutDirectionStates">
-                                    <VisualState x:Name="BottomDirection"/>
-                                    <VisualState x:Name="TopDirection">
-                                        <VisualState.Setters>
-                                            <Setter Target="SelectionAccent.VerticalAlignment" Value="Bottom"/>
-                                        </VisualState.Setters>
-                                    </VisualState>
-                                    <VisualState x:Name="RightDirection">
-                                        <VisualState.Setters>
-                                            <Setter Target="SelectionAccent.HorizontalAlignment" Value="Right"/>
-                                            <Setter Target="SelectionAccent.VerticalAlignment" Value="Stretch"/>
-                                            <Setter Target="SelectionAccent.Height" Value="auto"/>
-                                            <Setter Target="SelectionAccent.Width" Value="2"/>
-                                        </VisualState.Setters>
-                                    </VisualState>
-                                    <VisualState x:Name="LeftDirection">
-                                        <VisualState.Setters>
-                                            <Setter Target="SelectionAccent.HorizontalAlignment" Value="Left"/>
-                                            <Setter Target="SelectionAccent.VerticalAlignment" Value="Stretch"/>
-                                            <Setter Target="SelectionAccent.Height" Value="auto"/>
-                                            <Setter Target="SelectionAccent.Width" Value="2"/>
-                                        </VisualState.Setters>
-                                    </VisualState>
-                                </VisualStateGroup>
-                            </VisualStateManager.VisualStateGroups>
-                            <Rectangle x:Name="ContentBackground" Fill="Transparent"/>
-                            <ContentPresenter x:Name="Content" HighContrastAdjustment="None" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                            <Border x:Name="Border" BorderThickness="{TemplateBinding BorderThickness}" BorderBrush="{TemplateBinding BorderBrush}" Grid.ColumnSpan="2" Margin="1,0" Grid.RowSpan="2"/>
-                            <Rectangle x:Name="SelectionAccent" Style="{StaticResource InkToolbarSelectionAccentStyle}"/>
-                        </Grid>
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
-        </Style>
-    </Page.Resources>
-    <Grid Background="Black">
-        <StackPanel>
-
-            <Button Content="Action" Style="{StaticResource  ButtonRevealStyle}" Background="Transparent" CornerRadius="100"
-                    Height="96" Width="96"/>
-            <Button Content="Action" Style="{StaticResource  ButtonRevealStyle}" Background="Transparent" 
-                    />
-            <ToggleButton Content="Action" />
-            <!--<Viewbox Height="100" Width="100" HorizontalAlignment="Center">-->
-            <Ellipse Height="50" Width="50" Fill="White" StrokeThickness="5" Stroke="{ThemeResource ButtonRevealBorderBrush}"/>
-            <!--</Viewbox>-->
-
-            <Grid>
-                <Viewbox Height="200" Width="200" HorizontalAlignment="Center">
-                    <Ellipse Height="50" Width="50" Fill="White" StrokeThickness="5" Stroke="{ThemeResource ButtonRevealBorderBrush}" />
-                </Viewbox>
-                <Viewbox Height="195" Width="195" HorizontalAlignment="Center" VerticalAlignment="Center">
-                    <Ellipse Height="50" Width="50" Fill="White" StrokeThickness="5" Stroke="{ThemeResource ButtonRevealBorderBrush}"/>
-                </Viewbox>
-                <Viewbox Height="190" Width="190" HorizontalAlignment="Center" VerticalAlignment="Center">
-                    <Ellipse Height="50" Width="50" Fill="White" StrokeThickness="5" Stroke="{ThemeResource ButtonRevealBorderBrush}"/>
-                </Viewbox>
-            </Grid>
-            <InkToolbarCustomToggleButton Style="{StaticResource InkToolbarCustomToggleButtonStyle1}"/>
-            <Ellipse Height="50" Width="50" Fill="White" StrokeThickness="5" Stroke="{ThemeResource ButtonRevealBorderBrush}" x:Name="EE"/>
-            <local:PomodoroStateButton Height="96" Width="96" HorizontalAlignment="Center" VerticalAlignment="Center"
-                                   x:Name="Button"
+    
+    <Grid Background="Pink">
+        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+           
+            <Viewbox Height="96" Width="96">
+                <Grid>
+                    <local:PomodoroStateButton  HorizontalAlignment="Center" VerticalAlignment="Center" UseLayoutRounding="True"
+                                   x:Name="Button" 
                                    Click="OnClick" />
-            <Viewbox Height="25" Width="25">
-            <Rectangle Height="100" Width="100" x:Name="RR"/>
+
+                </Grid>
             </Viewbox>
+            <Viewbox Height="48" Width="48" Margin="20">
+                <local:PomodoroStateButton  
+                                  
+                                   Click="OnClick" />
+
+            </Viewbox>
+            <Grid Height="24" Width="24" Margin="20">
+                <local:PomodoroStateButton  
+                                  
+                                   Click="OnClick" />
+
+            </Grid>
+            <local:PomodoroStateButton  HorizontalAlignment="Center" VerticalAlignment="Center" UseLayoutRounding="True"
+                                   Click="OnClick" />
+            <Grid >
+
+                <Viewbox Height="40" Width="40" HorizontalAlignment="Center" VerticalAlignment="Center">
+                <controls:DropShadowPanel Height="48" Width="48" >
+                    <Rectangle Height="48" Width="48"  Stroke="White" StrokeThickness="4" />
+                </controls:DropShadowPanel>
+                </Viewbox>
+                <Rectangle Height="48" Width="48"  Stroke="White" StrokeThickness="4"/>
+            </Grid>
         </StackPanel>
 
     </Grid>
