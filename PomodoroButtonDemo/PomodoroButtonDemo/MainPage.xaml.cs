@@ -16,7 +16,8 @@ using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 using Windows.UI.Xaml.Shapes;
-
+using Microsoft.Graphics.Canvas.Effects;
+using Windows.UI.Composition;
 // https://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x804 上介绍了“空白页”项模板
 
 namespace PomodoroButtonDemo
@@ -40,7 +41,6 @@ namespace PomodoroButtonDemo
             _index++;
 
             //var _compositor = Window.Current.Compositor;
-
 
 
             //var maskBrush = _compositor.CreateMaskBrush();
