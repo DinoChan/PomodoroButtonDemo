@@ -53,41 +53,7 @@ namespace PomodoroButtonDemo
 
 
 
-        /// <summary>
-        /// 获取或设置ShadowColor的值
-        /// </summary>
-        public Color ShadowColor
-        {
-            get => (Color)GetValue(ShadowColorProperty);
-            set => SetValue(ShadowColorProperty, value);
-        }
-
-        /// <summary>
-        /// 标识 ShadowColor 依赖属性。
-        /// </summary>
-        public static readonly DependencyProperty ShadowColorProperty =
-            DependencyProperty.Register(nameof(ShadowColor), typeof(Color), typeof(PomodoroStateButton), new PropertyMetadata(Colors.Black, OnShadowColorChanged));
-
-        private static void OnShadowColorChanged(DependencyObject obj, DependencyPropertyChangedEventArgs args)
-        {
-            var oldValue = (Color)args.OldValue;
-            var newValue = (Color)args.NewValue;
-            if (oldValue == newValue)
-                return;
-
-            var target = obj as PomodoroStateButton;
-            target?.OnShadowColorChanged(oldValue, newValue);
-        }
-
-        /// <summary>
-        /// ShadowColor 属性更改时调用此方法。
-        /// </summary>
-        /// <param name="oldValue">ShadowColor 属性的旧值。</param>
-        /// <param name="newValue">ShadowColor 属性的新值。</param>
-        protected virtual void OnShadowColorChanged(Color oldValue, Color newValue)
-        {
-        }
-
+    
         public PomodoroStateButton()
         {
             DefaultStyleKey = typeof(PomodoroStateButton);

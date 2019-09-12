@@ -14,6 +14,10 @@ using Windows.UI.Xaml.Shapes;
 
 namespace PomodoroButtonDemo
 {
+    [TemplateVisualState(GroupName = CommonStatesName, Name = NormalStateName)]
+    [TemplateVisualState(GroupName = CommonStatesName, Name = PointerOverStateName)]
+    [TemplateVisualState(GroupName = CommonStatesName, Name = PressedStateName)]
+
     public class ButtonDecorator : Control
     {
         private const string CommonStatesName = "PromodoroStates";
@@ -42,7 +46,7 @@ namespace PomodoroButtonDemo
 
         public ButtonDecorator()
         {
-            this.DefaultStyleKey = typeof(OutlinePanel);
+            this.DefaultStyleKey = typeof(ButtonDecorator);
             _compositor = ElementCompositionPreview.GetElementVisual(this).Compositor;
             Visual = _compositor.CreateSpriteVisual();
             _maskBrush = _compositor.CreateMaskBrush();

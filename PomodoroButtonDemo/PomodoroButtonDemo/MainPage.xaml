@@ -10,13 +10,16 @@
     RequestedTheme="Dark"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
     
-    <Grid Background="Pink">
+    <Grid Background="Black">
         <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
            
             <Viewbox Height="96" Width="96">
                 <Grid>
                     <local:PomodoroStateButton  HorizontalAlignment="Center" VerticalAlignment="Center" UseLayoutRounding="True"
-                                   x:Name="Button" 
+                                   x:Name="Button"  
+                            local:DropShadowPanel.BlurRadius="8"
+                                                      local:DropShadowPanel.OffsetY="2"
+                                                      local:DropShadowPanel.ShadowOpacity="0.3"
                                    Click="OnClick" />
 
                 </Grid>
@@ -35,15 +38,22 @@
             </Grid>
             <local:PomodoroStateButton  HorizontalAlignment="Center" VerticalAlignment="Center" UseLayoutRounding="True"
                                    Click="OnClick" />
-            <Grid >
+       
 
                 <Viewbox Height="40" Width="40" HorizontalAlignment="Center" VerticalAlignment="Center">
                 <controls:DropShadowPanel Height="48" Width="48" >
                     <Rectangle Height="48" Width="48"  Stroke="White" StrokeThickness="4" />
                 </controls:DropShadowPanel>
                 </Viewbox>
-                <Rectangle Height="48" Width="48"  Stroke="White" StrokeThickness="4"/>
-            </Grid>
+
+                <Viewbox Height="40" Width="40" HorizontalAlignment="Center" VerticalAlignment="Center">
+                    <Grid Height="48" Width="48">
+                        <local:DropShadowPanel RelativeElement="{Binding ElementName=rec}"  BlurRadius="29"/>
+                        <Rectangle x:Name="rec" Stroke="White" StrokeThickness="4" />
+
+                    </Grid>
+                </Viewbox>
+       
         </StackPanel>
 
     </Grid>

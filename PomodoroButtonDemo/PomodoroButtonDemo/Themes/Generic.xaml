@@ -11,6 +11,7 @@
         <Setter Property="HorizontalAlignment" Value="Stretch"/>
         <Setter Property="VerticalAlignment" Value="Stretch"/>
         <Setter Property="IsHitTestVisible" Value="False"/>
+        <Setter Property="Color" Value="{ThemeResource SystemBaseHighColor}"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="local:OutlinePanel">
@@ -91,67 +92,44 @@
     </Style>
 
 
-    <Style TargetType="local:InsetPanel" >
-        <Setter Property="IsTabStop" Value="False" />
-        <Setter Property="HorizontalAlignment" Value="Stretch"/>
-        <Setter Property="VerticalAlignment" Value="Stretch"/>
-        <Setter Property="IsHitTestVisible" Value="False"/>
-        <Setter Property="Template">
-            <Setter.Value>
-                <ControlTemplate TargetType="local:InsetPanel">
-                    <Grid>
-                        <VisualStateManager.VisualStateGroups>
-                            <VisualStateGroup x:Name="CommonStates">
-                                <VisualStateGroup.Transitions>
-                                    <VisualTransition From="Normal" To="PointerOver" GeneratedDuration="0:0:0.5">
-                                        <VisualTransition.GeneratedEasingFunction>
-                                            <CubicEase EasingMode="EaseOut" />
-                                        </VisualTransition.GeneratedEasingFunction>
-                                    </VisualTransition>
-                                    <VisualTransition To="Normal" GeneratedDuration="0:0:0.5">
-                                        <VisualTransition.GeneratedEasingFunction>
-                                            <CubicEase EasingMode="EaseIn" />
-                                        </VisualTransition.GeneratedEasingFunction>
-                                    </VisualTransition>
-                                </VisualStateGroup.Transitions>
-                                <VisualState x:Name="Normal" >
-                                    <VisualState.Setters>
-                                        <Setter Target="OutlineBorder.Opacity" Value="0"/>
-                                    </VisualState.Setters>
-                                </VisualState>
-                                <VisualState x:Name="PointerOver">
-                                    <VisualState.Setters>
-                                        <Setter Target="OutlineBorder.Opacity" Value="1"/>
-                                    </VisualState.Setters>
-                                </VisualState>
-                                <VisualState x:Name="Pressed">
-                                    <VisualState.Setters>
-                                        <Setter Target="OutlineBorder.Opacity" Value="0.8"/>
-                                    </VisualState.Setters>
-                                </VisualState>
-                            </VisualStateGroup>
-                        </VisualStateManager.VisualStateGroups>
-                        <Border x:Name="OutlineBorder" />
-
-
-                    </Grid>
-
-                </ControlTemplate>
-            </Setter.Value>
-        </Setter>
-    </Style>
-
-
-    <Style TargetType="local:InsetDropShadowPanel">
+    <Style TargetType="local:DropShadowPanel">
         <Setter Property="IsTabStop"
                 Value="False" />
         <Setter Property="HorizontalAlignment" Value="Stretch"/>
         <Setter Property="HorizontalContentAlignment" Value="Left"/>
         <Setter Property="VerticalAlignment" Value="Stretch"/>
         <Setter Property="VerticalContentAlignment" Value="Stretch"/>
+        <Setter Property="IsHitTestVisible" Value="False"/>
         <Setter Property="Template">
             <Setter.Value>
-                <ControlTemplate TargetType="local:InsetDropShadowPanel">
+                <ControlTemplate TargetType="local:DropShadowPanel">
+                    <Grid Background="{TemplateBinding Background}"
+                          BorderBrush="{TemplateBinding BorderBrush}"
+                          BorderThickness="{TemplateBinding BorderThickness}"
+                          HorizontalAlignment="{TemplateBinding HorizontalAlignment}"
+                          VerticalAlignment="{TemplateBinding VerticalAlignment}">
+                        <Border x:Name="OutlineBorder" 
+                                HorizontalAlignment="{TemplateBinding HorizontalAlignment}"
+                                VerticalAlignment="{TemplateBinding HorizontalAlignment}" />
+
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style TargetType="local:ButtonDecorator" x:Key="InsetPanel">
+        <Setter Property="IsTabStop"
+                Value="False" />
+        <Setter Property="HorizontalAlignment" Value="Stretch"/>
+        <Setter Property="HorizontalContentAlignment" Value="Left"/>
+        <Setter Property="VerticalAlignment" Value="Stretch"/>
+        <Setter Property="VerticalContentAlignment" Value="Stretch"/>
+        <Setter Property="IsHitTestVisible" Value="False"/>
+        <Setter Property="local:DropShadowPanel.BlurRadius" Value="3"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="local:ButtonDecorator">
                     <Grid Background="{TemplateBinding Background}"
                           BorderBrush="{TemplateBinding BorderBrush}"
                           BorderThickness="{TemplateBinding BorderThickness}"
@@ -160,106 +138,105 @@
                         <VisualStateManager.VisualStateGroups>
                             <VisualStateGroup x:Name="CommonStates">
                                 <VisualStateGroup.Transitions>
-                                    <VisualTransition From="Normal" To="PointerOver" GeneratedDuration="0:0:0.5">
-                                        <!--<VisualTransition.GeneratedEasingFunction>
+                                    <VisualTransition From="Normal" To="PointerOver" >
+                                        <VisualTransition.GeneratedEasingFunction>
                                             <CubicEase EasingMode="EaseOut" />
-                                        </VisualTransition.GeneratedEasingFunction>-->
+                                        </VisualTransition.GeneratedEasingFunction>
                                     </VisualTransition>
-                                    <VisualTransition To="Normal" GeneratedDuration="0:0:0.5">
-                                        <!--<VisualTransition.GeneratedEasingFunction>
+                                    <VisualTransition  To="Normal" GeneratedDuration="0:0:0.5">
+                                        <VisualTransition.GeneratedEasingFunction>
                                             <CubicEase EasingMode="EaseIn" />
-                                        </VisualTransition.GeneratedEasingFunction>-->
+                                        </VisualTransition.GeneratedEasingFunction>
+
                                     </VisualTransition>
                                 </VisualStateGroup.Transitions>
                                 <VisualState x:Name="Normal" >
-                                   
+                                    <VisualState.Setters>
+                                    </VisualState.Setters>
                                 </VisualState>
                                 <VisualState x:Name="PointerOver">
                                     <VisualState.Setters>
-                                        <Setter Target="Shadow.Color" Value="White"/>
-                                        <!--<Setter Target="Shadow.OffsetX" Value="0"/>
-                                        <Setter Target="Shadow.OffsetY" Value="0"/>-->
+                                        <Setter Target="Shadow.Opacity" Value="0"/>
+                                        <Setter Target="InsetShadow.Opacity" Value="1"/>
                                     </VisualState.Setters>
                                 </VisualState>
                                 <VisualState x:Name="Pressed">
                                     <VisualState.Setters>
-                                        <!--<Setter Target="Shadow.Color" Value="White"/>-->
-                                        <Setter Target="Shadow.OffsetX" Value="0"/>
-                                        <Setter Target="Shadow.OffsetY" Value="0"/>
-                                        <Setter Target="Shadow.Opacity" Value="0.8"/>
+                                        <Setter Target="Shadow.Opacity" Value="0"/>
+                                        <Setter Target="InsetShadow.Opacity" Value="0.6"/>
                                     </VisualState.Setters>
                                 </VisualState>
                             </VisualStateGroup>
                         </VisualStateManager.VisualStateGroups>
-                        <controls:DropShadowPanel
-                            x:Name="Shadow"
-                            Content="{TemplateBinding Content}"
-                            Color="{TemplateBinding Color}"
-                            ShadowOpacity="{TemplateBinding ShadowOpacity}"
-                            BlurRadius="{TemplateBinding BlurRadius}"
-                             OffsetX="{TemplateBinding OffsetX}"
-                            OffsetY="{TemplateBinding OffsetY}"
-                            OffsetZ="{TemplateBinding OffsetZ}"/>
 
+                        <local:DropShadowPanel x:Name="Shadow" 
+                                               ShadowOpacity="{TemplateBinding local:DropShadowPanel.ShadowOpacity}"
+                                               BlurRadius="{TemplateBinding local:DropShadowPanel.BlurRadius}"
+                                               Color="{TemplateBinding local:DropShadowPanel.Color}"
+                                               OffsetX="{TemplateBinding local:DropShadowPanel.OffsetX}"
+                                               OffsetY="{TemplateBinding local:DropShadowPanel.OffsetY}"
+                                               OffsetZ="{TemplateBinding local:DropShadowPanel.OffsetZ}"
+                                               IsMasked="{TemplateBinding local:DropShadowPanel.IsMasked}"
+                                               RelativeElement="{TemplateBinding RelativeElement}"/>
+
+
+                        <local:DropShadowPanel x:Name="InsetShadow" 
+                                               Opacity="0"
+                                               ShadowOpacity="0.7"
+                                               BlurRadius="3.5"
+                                               Color="{ThemeResource SystemBaseHighColor}"
+                                               OffsetX="0"
+                                               OffsetY="0"
+                                               OffsetZ="0"
+                                               RelativeElement="{TemplateBinding RelativeElement}"
+                                               RenderTransformOrigin="0.5,0.5">
+                            <local:DropShadowPanel.RenderTransform>
+                                <ScaleTransform ScaleX="0.91" ScaleY="0.93"/>
+                            </local:DropShadowPanel.RenderTransform>
+                        </local:DropShadowPanel>
                     </Grid>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
     </Style>
 
+
     <Style TargetType="local:PomodoroStateButton">
         <Setter Property="Background" Value="Transparent"/>
-        <Setter Property="Foreground" Value="Transparent"/>
-        <Setter Property="BorderBrush" Value="{ThemeResource SystemBaseHighColor}"/>
+        <Setter Property="Foreground" Value="{ThemeResource SystemBaseHighColor}"/>
+        <Setter Property="BorderBrush" Value="Transparent"/>
         <Setter Property="BorderThickness" Value="0"/>
-        <Setter Property="ShadowColor" Value="Black"/>
+        <Setter Property="local:DropShadowPanel.Color" Value="Black"/>
+        <Setter Property="local:DropShadowPanel.ShadowOpacity" Value="0"/>
+        <Setter Property="Height" Value="48"/>
+        <Setter Property="Width" Value="48"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="local:PomodoroStateButton">
-                    <Border Background="{TemplateBinding Background}"
+                    <Border Background="Transparent"
                             BorderThickness="{TemplateBinding BorderThickness}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
                             Padding="{TemplateBinding Padding}"
                             x:Name="RootGrid">
                         <VisualStateManager.VisualStateGroups>
                             <VisualStateGroup x:Name="CommonStates">
-                                <!--<VisualStateGroup.Transitions>
-                                    <VisualTransition From="Normal" To="PointerOver" >
-                                        <Storyboard>
-                                            <DoubleAnimation Storyboard.TargetName="Shadow" Storyboard.TargetProperty="ShadowOpacity" To="0" Duration="0:0:0.5">
-                                                <DoubleAnimation.EasingFunction>
-                                                    <CubicEase EasingMode="EaseOut"/>
-                                                </DoubleAnimation.EasingFunction>
-                                            </DoubleAnimation>
-                                        </Storyboard>
-                                    </VisualTransition>
-                                    <VisualTransition To="Normal" >
-                                        <Storyboard>
-                                            <DoubleAnimation Storyboard.TargetName="Shadow" Storyboard.TargetProperty="ShadowOpacity" To="1" Duration="0:0:0.5">
-                                                <DoubleAnimation.EasingFunction>
-                                                    <CubicEase EasingMode="EaseOut"/>
-                                                </DoubleAnimation.EasingFunction>
-                                            </DoubleAnimation>
-                                        </Storyboard>
-                                    </VisualTransition>
-                                </VisualStateGroup.Transitions>-->
                                 <VisualState x:Name="Normal" >
                                     <VisualState.Setters>
                                         <Setter Target="Outline.State" Value="Normal"/>
+                                        <Setter Target="Inset.State" Value="Normal"/>
                                     </VisualState.Setters>
                                 </VisualState>
                                 <VisualState x:Name="PointerOver">
                                     <VisualState.Setters>
                                         <Setter Target="Outline.State" Value="PointerOver"/>
-                                        <Setter Target="Shadow.State" Value="PointerOver"/>
-                                        <!--<Setter Target="Shadow.ShadowOpacity" Value="0"/>-->
+                                        <Setter Target="Inset.State" Value="PointerOver"/>
                                     </VisualState.Setters>
                                 </VisualState>
 
                                 <VisualState x:Name="Pressed">
                                     <VisualState.Setters>
                                         <Setter Target="Outline.State" Value="Pressed"/>
-                                        <Setter Target="Shadow.State" Value="Pressed"/>
-                                        <!--<Setter Target="Shadow.ShadowOpacity" Value="0"/>-->
+                                        <Setter Target="Inset.State" Value="Pressed"/>
                                     </VisualState.Setters>
                                 </VisualState>
 
@@ -339,36 +316,38 @@
                         </Border.Resources>
                         <Grid>
 
+                            <Viewbox Stretch="Uniform">
+                                <Grid Height="24" Width="24" RenderTransformOrigin=".5,.5">
+                                    <Grid.RenderTransform>
+                                        <CompositeTransform x:Name="ShapeCompositeTransform"/>
+                                    </Grid.RenderTransform>
+                                    <local:ButtonDecorator  x:Name="Inset"
+                                                        local:DropShadowPanel.ShadowOpacity="{TemplateBinding local:DropShadowPanel.ShadowOpacity}"
+                                                        local:DropShadowPanel.BlurRadius="{TemplateBinding local:DropShadowPanel.BlurRadius}"
+                                                        local:DropShadowPanel.Color="{TemplateBinding local:DropShadowPanel.Color}"
+                                                        local:DropShadowPanel.OffsetX="{TemplateBinding local:DropShadowPanel.OffsetX}"
+                                                        local:DropShadowPanel.OffsetY="{TemplateBinding local:DropShadowPanel.OffsetY}"
+                                                        local:DropShadowPanel.OffsetZ="{TemplateBinding local:DropShadowPanel.OffsetZ}"
+                                                        local:DropShadowPanel.IsMasked="{TemplateBinding local:DropShadowPanel.IsMasked}"
+                                                        RelativeElement="{Binding ElementName=Shape}" 
+                                                        Style="{StaticResource InsetPanel}"/>
 
-                            <Grid Height="24" Width="24" RenderTransformOrigin=".5,.5">
-                                <Grid.RenderTransform>
-                                    <CompositeTransform x:Name="ShapeCompositeTransform"/>
-                                </Grid.RenderTransform>
-
-
-                                <local:InsetDropShadowPanel  BlurRadius="8" 
-                                                           ShadowOpacity="1" 
-                                                           x:Name="Shadow" 
-                                                           Color="{TemplateBinding ShadowColor}">
                                     <Polygon Points="{Binding Source={StaticResource ProgressToPointCollectionBridge},Path=Points}"
-                                     Fill="{TemplateBinding Foreground}"
-                                     Stroke="{TemplateBinding BorderBrush}"
-                                     StrokeThickness="2"
-                                     Stretch="None"
-                                     StrokeEndLineCap="Round"
-                                     x:Name="Shape"/>
-                                </local:InsetDropShadowPanel>
-                                <local:InsetPanel RelativeElement="{Binding ElementName=Shape}" x:Name="Inset" Visibility="Collapsed"/>
-                                <local:OutlinePanel RelativeElement="{Binding ElementName=Shape}" x:Name="Outline" />
+                                             Fill="{TemplateBinding Background}"
+                                             Stroke="{TemplateBinding Foreground}"
+                                             StrokeThickness="2"
+                                             Stretch="None"
+                                             StrokeEndLineCap="Round"
+                                             x:Name="Shape"/>
 
-                            </Grid>
+                                    <local:OutlinePanel RelativeElement="{Binding ElementName=Shape}" x:Name="Outline" />
+                                </Grid>
+                            </Viewbox>
                         </Grid>
                     </Border>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
     </Style>
-
-
 
 </ResourceDictionary>

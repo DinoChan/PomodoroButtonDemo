@@ -123,7 +123,7 @@
     <Compile Include="ButtonState.cs" />
     <Compile Include="CustomControl1.cs" />
     <Compile Include="InsetPanel.cs" />
-    <Compile Include="InsetDropShadowPanel.cs" />
+    <Compile Include="DropShadowPanel.cs" />
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
@@ -175,6 +175,9 @@
     <PackageReference Include="Microsoft.Xaml.Behaviors.Uwp.Managed">
       <Version>2.0.1</Version>
     </PackageReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="DropShadowPanel.Properties.cs" />
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>
