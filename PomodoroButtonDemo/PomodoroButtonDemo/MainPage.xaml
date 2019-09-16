@@ -231,11 +231,14 @@
                                    Click="OnClick" />
 
             </Grid>
+            <Grid>
             <local:PomodoroStateButton  HorizontalAlignment="Center" VerticalAlignment="Center" UseLayoutRounding="True"
                                    Click="OnClick" />
-       
+                <local:PomodoroStateButton  HorizontalAlignment="Center" VerticalAlignment="Center" UseLayoutRounding="True"
+                                   Click="OnClick"  IsTimerInProgress="True"/>
+            </Grid>
 
-                <Viewbox Height="40" Width="40" HorizontalAlignment="Center" VerticalAlignment="Center">
+            <Viewbox Height="40" Width="40" HorizontalAlignment="Center" VerticalAlignment="Center">
                 <controls:DropShadowPanel Height="48" Width="48" >
                     <Rectangle Height="48" Width="48"  Stroke="White" StrokeThickness="4" />
                 </controls:DropShadowPanel>

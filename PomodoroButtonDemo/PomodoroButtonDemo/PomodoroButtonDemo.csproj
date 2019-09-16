@@ -122,6 +122,7 @@
     <Compile Include="ButtonDecorator.cs" />
     <Compile Include="ButtonState.cs" />
     <Compile Include="CustomControl1.cs" />
+    <Compile Include="PomodoroButtonBrush.cs" />
     <Compile Include="InsetPanel.cs" />
     <Compile Include="DropShadowPanel.cs" />
     <Compile Include="MainPage.xaml.cs">
