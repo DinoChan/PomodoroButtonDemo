@@ -51,7 +51,7 @@ namespace PomodoroButtonDemo
             //_backgroundVisual.Brush = maskBrush;
             //_backgroundVisual.Size = new System.Numerics.Vector2(300);
             //ElementCompositionPreview.SetElementChildVisual(RR, _backgroundVisual);
-
+            Button.Height += 1;
             switch (_index % 4)
             {
                 case 0:

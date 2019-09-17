@@ -292,16 +292,15 @@
                             </VisualStateGroup>
 
                             <VisualStateGroup x:Name="PromodoroStates">
-                                <VisualStateGroup.Transitions>
+                                <!--<VisualStateGroup.Transitions>
                                     <VisualTransition GeneratedDuration="0:0:3">
                                         <VisualTransition.GeneratedEasingFunction>
                                             <CubicEase EasingMode="EaseOut" />
                                         </VisualTransition.GeneratedEasingFunction>
                                     </VisualTransition>
-                                </VisualStateGroup.Transitions>
+                                </VisualStateGroup.Transitions>-->
                                 <VisualState x:Name="Inwork" />
-                                <VisualState x:Name="Break">
-                                </VisualState>
+                                <VisualState x:Name="Break"/>
                             </VisualStateGroup>
 
                         </VisualStateManager.VisualStateGroups>
@@ -332,13 +331,34 @@
                                                         RelativeElement="{Binding ElementName=Shape}" 
                                                         Style="{StaticResource InsetPanel}"/>
 
-                                    <Polygon Points="{Binding Source={StaticResource ProgressToPointCollectionBridge},Path=Points}"
-                                             Fill="{TemplateBinding Background}"
+                                    <!--<Polygon Points="{Binding Source={StaticResource ProgressToPointCollectionBridge},Path=Points}"
+                                             Fill="{TemplateBinding Foreground}"
                                              Stroke="{TemplateBinding Foreground}"
                                              StrokeThickness="2"
                                              Stretch="None"
                                              StrokeEndLineCap="Round"
-                                             x:Name="Shape"/>
+                                             x:Name="Shape">
+                                     
+                                    </Polygon>-->
+
+                                    <Polygon Points="{Binding Source={StaticResource ProgressToPointCollectionBridge},Path=Points}"
+                                             StrokeThickness="2"
+                                             Stretch="None"
+                                             StrokeEndLineCap="Round"
+                                             x:Name="Shape">
+                                        <Polygon.Fill>
+                                            <local:PomodoroButtonBrush PomodoroColor="{Binding RelativeSource={RelativeSource Mode=TemplatedParent},Path=PomodoroColor}"
+                                                                       BreakColor="{Binding RelativeSource={RelativeSource Mode=TemplatedParent},Path=BreakColor}"
+                                                                       IsInPomodoro="{Binding RelativeSource={RelativeSource Mode=TemplatedParent},Path=IsInPomodoro}"/>
+                                        </Polygon.Fill>
+                                        <Polygon.Stroke>
+                                            <local:PomodoroButtonBrush PomodoroColor="{Binding RelativeSource={RelativeSource Mode=TemplatedParent},Path=PomodoroColor}"
+                                                                       BreakColor="{Binding RelativeSource={RelativeSource Mode=TemplatedParent},Path=BreakColor}"
+                                                                       IsInPomodoro="{Binding RelativeSource={RelativeSource Mode=TemplatedParent},Path=IsInPomodoro}"/>
+                                        </Polygon.Stroke>
+                                    </Polygon>
+                                    
+                                    
 
                                     <local:OutlinePanel RelativeElement="{Binding ElementName=Shape}" x:Name="Outline" />
                                 </Grid>

@@ -29,7 +29,7 @@
                         <Grid x:Name="Root" MinWidth="{TemplateBinding MinWidth}" MaxWidth="{TemplateBinding MaxWidth}" Background="{TemplateBinding Background}" CornerRadius="{TemplateBinding CornerRadius}" Margin="1,0">
 
                             <VisualStateManager.VisualStateGroups>
-                              
+
                                 <VisualStateGroup x:Name="CommonStates">
                                     <VisualState x:Name="Normal">
 
@@ -205,23 +205,23 @@
             </Setter>
         </Style>
     </Page.Resources>
-    <Grid Background="Black">
+    <Grid Background="Pink">
         <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
-           
-            <Viewbox Height="96" Width="96">
-                <Grid>
-                    <local:PomodoroStateButton  HorizontalAlignment="Center" VerticalAlignment="Center" UseLayoutRounding="True"
-                                   x:Name="Button"  
-                            local:DropShadowPanel.BlurRadius="8"
+
+            <Grid>
+                <local:PomodoroStateButton  HorizontalAlignment="Center" VerticalAlignment="Center" UseLayoutRounding="True"
+                                   x:Name="Button"  PomodoroColor="Red" BreakColor="BlueViolet" Height="96" Width="96"
+                      
+                                                      local:DropShadowPanel.BlurRadius="8"
                                                       local:DropShadowPanel.OffsetY="2"
                                                       local:DropShadowPanel.ShadowOpacity="0.3"
                                    Click="OnClick" />
 
-                </Grid>
-            </Viewbox>
+            </Grid>
             <Viewbox Height="48" Width="48" Margin="20">
-                <local:PomodoroStateButton  
-                                  
+                <local:PomodoroStateButton   local:DropShadowPanel.OffsetY="2"
+                                                      local:DropShadowPanel.ShadowOpacity="0.3"
+                                   local:DropShadowPanel.BlurRadius="8"
                                    Click="OnClick" />
 
             </Viewbox>
@@ -232,7 +232,7 @@
 
             </Grid>
             <Grid>
-            <local:PomodoroStateButton  HorizontalAlignment="Center" VerticalAlignment="Center" UseLayoutRounding="True"
+                <local:PomodoroStateButton  HorizontalAlignment="Center" VerticalAlignment="Center" UseLayoutRounding="True"
                                    Click="OnClick" />
                 <local:PomodoroStateButton  HorizontalAlignment="Center" VerticalAlignment="Center" UseLayoutRounding="True"
                                    Click="OnClick"  IsTimerInProgress="True"/>
@@ -242,16 +242,16 @@
                 <controls:DropShadowPanel Height="48" Width="48" >
                     <Rectangle Height="48" Width="48"  Stroke="White" StrokeThickness="4" />
                 </controls:DropShadowPanel>
-                </Viewbox>
+            </Viewbox>
 
-                <Viewbox Height="40" Width="40" HorizontalAlignment="Center" VerticalAlignment="Center">
-                    <Grid Height="48" Width="48">
-                        <local:DropShadowPanel RelativeElement="{Binding ElementName=rec}"  BlurRadius="29"/>
-                        <Rectangle x:Name="rec" Stroke="White" StrokeThickness="4" />
+            <Viewbox Height="40" Width="40" HorizontalAlignment="Center" VerticalAlignment="Center">
+                <Grid Height="48" Width="48">
+                    <local:DropShadowPanel RelativeElement="{Binding ElementName=rec}"  BlurRadius="29"/>
+                    <Rectangle x:Name="rec" Stroke="White" StrokeThickness="4" />
 
-                    </Grid>
-                </Viewbox>
-       
+                </Grid>
+            </Viewbox>
+
         </StackPanel>
 
     </Grid>

@@ -18,13 +18,13 @@ namespace PomodoroButtonDemo
         /// 标识 PomodoroColor 依赖属性。
         /// </summary>
         public static readonly DependencyProperty PomodoroColorProperty =
-            DependencyProperty.Register(nameof(PomodoroColor), typeof(Color), typeof(PomodoroButtonBrush), new PropertyMetadata(Colors.White, OnPomodoroColorChanged));
+            DependencyProperty.Register(nameof(PomodoroColor), typeof(Color), typeof(PomodoroButtonBrush), new PropertyMetadata(Colors.White));
 
         /// <summary>
         /// 标识 BreakColor 依赖属性。
         /// </summary>
         public static readonly DependencyProperty BreakColorProperty =
-            DependencyProperty.Register(nameof(BreakColor), typeof(Color), typeof(PomodoroButtonBrush), new PropertyMetadata(Colors.White, OnBreakColorChanged));
+            DependencyProperty.Register(nameof(BreakColor), typeof(Color), typeof(PomodoroButtonBrush), new PropertyMetadata(Colors.White));
 
         public static readonly DependencyProperty DurationProperty =
             DependencyProperty.Register("Duration", typeof(TimeSpan), typeof(PomodoroButtonBrush), new PropertyMetadata(TimeSpan.FromSeconds(0.3d), (s, a) =>
