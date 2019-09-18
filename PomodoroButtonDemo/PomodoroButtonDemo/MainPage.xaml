@@ -208,9 +208,12 @@
     <Grid Background="Pink">
         <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
 
+            <local:PomodoroStateButton  Height="120" Width="120" Margin="20" local:DropShadowPanel.OffsetY="2" PomodoroColor="Red" BreakColor="BlueViolet"
+                                   Click="OnClick" />
+            
             <Grid>
                 <local:PomodoroStateButton  HorizontalAlignment="Center" VerticalAlignment="Center" UseLayoutRounding="True"
-                                   x:Name="Button"  PomodoroColor="Red" BreakColor="BlueViolet" Height="96" Width="96"
+                                 PomodoroColor="Red" BreakColor="BlueViolet" Height="96" Width="96"
                       
                                                       local:DropShadowPanel.BlurRadius="8"
                                                       local:DropShadowPanel.OffsetY="2"
@@ -218,13 +221,13 @@
                                    Click="OnClick" />
 
             </Grid>
-            <Viewbox Height="48" Width="48" Margin="20">
-                <local:PomodoroStateButton   local:DropShadowPanel.OffsetY="2"
-                                                      local:DropShadowPanel.ShadowOpacity="0.3"
+
+
+            <local:PomodoroStateButton    x:Name="Button"  Height="48" Width="48" Margin="20" local:DropShadowPanel.OffsetY="2" PomodoroColor="Red" BreakColor="BlueViolet"
+                                                      local:DropShadowPanel.ShadowOpacity="0.4"
                                    local:DropShadowPanel.BlurRadius="8"
                                    Click="OnClick" />
 
-            </Viewbox>
             <Grid Height="24" Width="24" Margin="20">
                 <local:PomodoroStateButton  
                                   
@@ -247,7 +250,7 @@
             <Viewbox Height="40" Width="40" HorizontalAlignment="Center" VerticalAlignment="Center">
                 <Grid Height="48" Width="48">
                     <local:DropShadowPanel RelativeElement="{Binding ElementName=rec}"  BlurRadius="29"/>
-                    <Rectangle x:Name="rec" Stroke="White" StrokeThickness="4" />
+                    <Rectangle x:Name="rec" Stroke="White" StrokeThickness="4" Fill="White" Opacity="0.5"/>
 
                 </Grid>
             </Viewbox>

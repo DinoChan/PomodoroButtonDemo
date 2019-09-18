@@ -3,10 +3,10 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:interactivity="using:Microsoft.Xaml.Interactivity"
     xmlns:behaviors="using:Microsoft.Toolkit.Uwp.UI.Animations.Behaviors"
-    xmlns:local="using:PomodoroButtonDemo"
-    xmlns:controls="using:Microsoft.Toolkit.Uwp.UI.Controls">
+    xmlns:controls="using:PomodoroButtonDemo"
+    >
 
-    <Style TargetType="local:OutlinePanel">
+    <Style TargetType="controls:OutlinePanel">
         <Setter Property="IsTabStop" Value="False" />
         <Setter Property="HorizontalAlignment" Value="Stretch"/>
         <Setter Property="VerticalAlignment" Value="Stretch"/>
@@ -14,7 +14,7 @@
         <Setter Property="Color" Value="{ThemeResource SystemBaseHighColor}"/>
         <Setter Property="Template">
             <Setter.Value>
-                <ControlTemplate TargetType="local:OutlinePanel">
+                <ControlTemplate TargetType="controls:OutlinePanel">
                     <Grid>
                         <VisualStateManager.VisualStateGroups>
                             <VisualStateGroup x:Name="CommonStates">
@@ -35,7 +35,7 @@
                                     </VisualTransition>
                                     <VisualTransition To="Normal" >
                                         <Storyboard>
-                                            <DoubleAnimation Storyboard.TargetName="OutlineBorder" Storyboard.TargetProperty="Opacity" To="0.3" Duration="0:0:1.5">
+                                            <DoubleAnimation Storyboard.TargetName="OutlineBorder" Storyboard.TargetProperty="Opacity" To="0.2" Duration="0:0:1.5">
                                                 <DoubleAnimation.EasingFunction>
                                                     <CubicEase EasingMode="EaseOut"/>
                                                 </DoubleAnimation.EasingFunction>
@@ -52,14 +52,14 @@
                                     <VisualState.Setters>
                                         <Setter Target="Scale.ScaleX" Value="1"/>
                                         <Setter Target="Scale.ScaleY" Value="1"/>
-                                        <Setter Target="OutlineBorder.Opacity" Value="0.3"/>
+                                        <Setter Target="OutlineBorder.Opacity" Value="0.2"/>
                                         <Setter Target="OutlineBorder.Visibility" Value="Collapsed"/>
                                     </VisualState.Setters>
                                 </VisualState>
                                 <VisualState x:Name="PointerOver">
                                     <VisualState.Setters>
-                                        <Setter Target="Scale.ScaleX" Value="2.5"/>
-                                        <Setter Target="Scale.ScaleY" Value="2.5"/>
+                                        <Setter Target="Scale.ScaleX" Value="2.6"/>
+                                        <Setter Target="Scale.ScaleY" Value="2.6"/>
                                         <Setter Target="OutlineBorder.Opacity" Value="0"/>
                                         <Setter Target="OutlineBorder.Visibility" Value="Visible"/>
                                     </VisualState.Setters>
@@ -75,8 +75,8 @@
                                 <behaviors:Scale x:Name="Scale"
                                                     ScaleX="1"
                                                     ScaleY="1"
-                                                    CenterX="12"
-                                                    CenterY="12"
+                                                    CenterX="24"
+                                                    CenterY="24"
                                                     Duration="800"
                                                     Delay="0"
                                                     EasingType="Cubic"
@@ -85,14 +85,13 @@
                             </interactivity:Interaction.Behaviors>
                         </Border>
                     </Grid>
-
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
     </Style>
 
 
-    <Style TargetType="local:DropShadowPanel">
+    <Style TargetType="controls:DropShadowPanel">
         <Setter Property="IsTabStop"
                 Value="False" />
         <Setter Property="HorizontalAlignment" Value="Stretch"/>
@@ -102,7 +101,7 @@
         <Setter Property="IsHitTestVisible" Value="False"/>
         <Setter Property="Template">
             <Setter.Value>
-                <ControlTemplate TargetType="local:DropShadowPanel">
+                <ControlTemplate TargetType="controls:DropShadowPanel">
                     <Grid Background="{TemplateBinding Background}"
                           BorderBrush="{TemplateBinding BorderBrush}"
                           BorderThickness="{TemplateBinding BorderThickness}"
@@ -111,14 +110,13 @@
                         <Border x:Name="OutlineBorder" 
                                 HorizontalAlignment="{TemplateBinding HorizontalAlignment}"
                                 VerticalAlignment="{TemplateBinding HorizontalAlignment}" />
-
                     </Grid>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
     </Style>
 
-    <Style TargetType="local:ButtonDecorator" x:Key="InsetPanel">
+    <Style TargetType="controls:ButtonDecorator" x:Key="Shadow">
         <Setter Property="IsTabStop"
                 Value="False" />
         <Setter Property="HorizontalAlignment" Value="Stretch"/>
@@ -126,10 +124,10 @@
         <Setter Property="VerticalAlignment" Value="Stretch"/>
         <Setter Property="VerticalContentAlignment" Value="Stretch"/>
         <Setter Property="IsHitTestVisible" Value="False"/>
-        <Setter Property="local:DropShadowPanel.BlurRadius" Value="3"/>
+        <Setter Property="controls:DropShadowPanel.BlurRadius" Value="3"/>
         <Setter Property="Template">
             <Setter.Value>
-                <ControlTemplate TargetType="local:ButtonDecorator">
+                <ControlTemplate TargetType="controls:ButtonDecorator">
                     <Grid Background="{TemplateBinding Background}"
                           BorderBrush="{TemplateBinding BorderBrush}"
                           BorderThickness="{TemplateBinding BorderThickness}"
@@ -147,7 +145,6 @@
                                         <VisualTransition.GeneratedEasingFunction>
                                             <CubicEase EasingMode="EaseIn" />
                                         </VisualTransition.GeneratedEasingFunction>
-
                                     </VisualTransition>
                                 </VisualStateGroup.Transitions>
                                 <VisualState x:Name="Normal" >
@@ -157,43 +154,38 @@
                                 <VisualState x:Name="PointerOver">
                                     <VisualState.Setters>
                                         <Setter Target="Shadow.Opacity" Value="0"/>
-                                        <Setter Target="InsetShadow.Opacity" Value="1"/>
+                                        <Setter Target="GlowShadow.Opacity" Value="1"/>
                                     </VisualState.Setters>
                                 </VisualState>
                                 <VisualState x:Name="Pressed">
                                     <VisualState.Setters>
                                         <Setter Target="Shadow.Opacity" Value="0"/>
-                                        <Setter Target="InsetShadow.Opacity" Value="0.6"/>
+                                        <Setter Target="GlowShadow.Opacity" Value="1"/>
                                     </VisualState.Setters>
                                 </VisualState>
                             </VisualStateGroup>
                         </VisualStateManager.VisualStateGroups>
 
-                        <local:DropShadowPanel x:Name="Shadow" 
-                                               ShadowOpacity="{TemplateBinding local:DropShadowPanel.ShadowOpacity}"
-                                               BlurRadius="{TemplateBinding local:DropShadowPanel.BlurRadius}"
-                                               Color="{TemplateBinding local:DropShadowPanel.Color}"
-                                               OffsetX="{TemplateBinding local:DropShadowPanel.OffsetX}"
-                                               OffsetY="{TemplateBinding local:DropShadowPanel.OffsetY}"
-                                               OffsetZ="{TemplateBinding local:DropShadowPanel.OffsetZ}"
-                                               IsMasked="{TemplateBinding local:DropShadowPanel.IsMasked}"
+                        <controls:DropShadowPanel x:Name="Shadow" 
+                                               ShadowOpacity="{TemplateBinding controls:DropShadowPanel.ShadowOpacity}"
+                                               BlurRadius="{TemplateBinding controls:DropShadowPanel.BlurRadius}"
+                                               Color="{TemplateBinding controls:DropShadowPanel.Color}"
+                                               OffsetX="{TemplateBinding controls:DropShadowPanel.OffsetX}"
+                                               OffsetY="{TemplateBinding controls:DropShadowPanel.OffsetY}"
+                                               OffsetZ="{TemplateBinding controls:DropShadowPanel.OffsetZ}"
+                                               IsMasked="{TemplateBinding controls:DropShadowPanel.IsMasked}"
                                                RelativeElement="{TemplateBinding RelativeElement}"/>
 
-
-                        <local:DropShadowPanel x:Name="InsetShadow" 
+                        <controls:DropShadowPanel x:Name="GlowShadow" 
                                                Opacity="0"
-                                               ShadowOpacity="0.7"
-                                               BlurRadius="3.5"
+                                               ShadowOpacity="0.6"
+                                               BlurRadius="44"
                                                Color="{ThemeResource SystemBaseHighColor}"
                                                OffsetX="0"
                                                OffsetY="0"
                                                OffsetZ="0"
                                                RelativeElement="{TemplateBinding RelativeElement}"
-                                               RenderTransformOrigin="0.5,0.5">
-                            <local:DropShadowPanel.RenderTransform>
-                                <ScaleTransform ScaleX="0.91" ScaleY="0.93"/>
-                            </local:DropShadowPanel.RenderTransform>
-                        </local:DropShadowPanel>
+                                               RenderTransformOrigin="0.5,0.5"/>
                     </Grid>
                 </ControlTemplate>
             </Setter.Value>
@@ -201,18 +193,20 @@
     </Style>
 
 
-    <Style TargetType="local:PomodoroStateButton">
+    <Style TargetType="controls:PomodoroStateButton">
         <Setter Property="Background" Value="Transparent"/>
         <Setter Property="Foreground" Value="{ThemeResource SystemBaseHighColor}"/>
         <Setter Property="BorderBrush" Value="Transparent"/>
         <Setter Property="BorderThickness" Value="0"/>
-        <Setter Property="local:DropShadowPanel.Color" Value="Black"/>
-        <Setter Property="local:DropShadowPanel.ShadowOpacity" Value="0"/>
+        <Setter Property="PomodoroColor" Value="White"/>
+        <Setter Property="BreakColor" Value="White"/>
+        <Setter Property="controls:DropShadowPanel.Color" Value="Black"/>
+        <Setter Property="controls:DropShadowPanel.ShadowOpacity" Value="0"/>
         <Setter Property="Height" Value="48"/>
         <Setter Property="Width" Value="48"/>
         <Setter Property="Template">
             <Setter.Value>
-                <ControlTemplate TargetType="local:PomodoroStateButton">
+                <ControlTemplate TargetType="controls:PomodoroStateButton">
                     <Border Background="Transparent"
                             BorderThickness="{TemplateBinding BorderThickness}"
                             BorderBrush="{TemplateBinding BorderBrush}"
@@ -223,20 +217,21 @@
                                 <VisualState x:Name="Normal" >
                                     <VisualState.Setters>
                                         <Setter Target="Outline.State" Value="Normal"/>
-                                        <Setter Target="Inset.State" Value="Normal"/>
+                                        <Setter Target="Shadow.State" Value="Normal"/>
                                     </VisualState.Setters>
                                 </VisualState>
                                 <VisualState x:Name="PointerOver">
                                     <VisualState.Setters>
                                         <Setter Target="Outline.State" Value="PointerOver"/>
-                                        <Setter Target="Inset.State" Value="PointerOver"/>
+                                        <Setter Target="Shadow.State" Value="PointerOver"/>
                                     </VisualState.Setters>
                                 </VisualState>
 
                                 <VisualState x:Name="Pressed">
                                     <VisualState.Setters>
                                         <Setter Target="Outline.State" Value="Pressed"/>
-                                        <Setter Target="Inset.State" Value="Pressed"/>
+                                        <Setter Target="Shadow.State" Value="Pressed"/>
+                                        <Setter Target="Shape.Opacity" Value="0.7"/>
                                     </VisualState.Setters>
                                 </VisualState>
 
@@ -273,20 +268,21 @@
                                                     <CubicEase EasingMode="EaseOut"/>
                                                 </DoubleAnimation.EasingFunction>
                                             </DoubleAnimation>
-                                            <DoubleAnimation Storyboard.TargetName="ShapeCompositeTransform" Storyboard.TargetProperty="Rotation" To="360" EnableDependentAnimation="True" Duration="0:0:0.3">
-                                                <DoubleAnimation.EasingFunction>
-                                                    <CubicEase EasingMode="EaseOut"/>
-                                                </DoubleAnimation.EasingFunction>
-                                            </DoubleAnimation>
+                                            <DoubleAnimationUsingKeyFrames  Storyboard.TargetName="ShapeCompositeTransform" Storyboard.TargetProperty="Rotation" EnableDependentAnimation="True">
+                                                <LinearDoubleKeyFrame Value="180"  KeyTime="0:0:0" />
+                                                <EasingDoubleKeyFrame Value="0" KeyTime="0:0:0.3">
+                                                    <EasingDoubleKeyFrame.EasingFunction>
+                                                        <CubicEase EasingMode="EaseOut"/>
+                                                    </EasingDoubleKeyFrame.EasingFunction>
+                                                </EasingDoubleKeyFrame>
+                                            </DoubleAnimationUsingKeyFrames>
                                         </Storyboard>
                                     </VisualTransition>
                                 </VisualStateGroup.Transitions>
                                 <VisualState x:Name="Idle" />
                                 <VisualState x:Name="Busy">
                                     <VisualState.Setters>
-                                        <Setter Target="ProgressToPointCollectionBridge.Progress"
-                                                Value="1" />
-                                        <Setter Target="ShapeCompositeTransform.Rotation" Value="180"/>
+                                        <Setter Target="ProgressToPointCollectionBridge.Progress" Value="1" />
                                     </VisualState.Setters>
                                 </VisualState>
                             </VisualStateGroup>
@@ -299,68 +295,61 @@
                                         </VisualTransition.GeneratedEasingFunction>
                                     </VisualTransition>
                                 </VisualStateGroup.Transitions>-->
-                                <VisualState x:Name="Inwork" />
-                                <VisualState x:Name="Break"/>
+                                <VisualState x:Name="Inwork" >
+                                    <Storyboard>
+                                        <ColorAnimation Duration="0:0:0.3" Storyboard.TargetName="Fill" Storyboard.TargetProperty="Color" To="{Binding RelativeSource={RelativeSource Mode=TemplatedParent},Path=PomodoroColor}" />
+                                        <!--<ColorAnimation Duration="0:0:0.3" Storyboard.TargetName="Stroke" Storyboard.TargetProperty="Color" To="{Binding RelativeSource={RelativeSource Mode=TemplatedParent},Path=PomodoroColor}" />-->
+                                    </Storyboard>
+                                </VisualState>
+                                <VisualState x:Name="Break">
+                                    <Storyboard>
+                                        <ColorAnimation Duration="0:0:0.3" Storyboard.TargetName="Fill" Storyboard.TargetProperty="Color" To="{Binding RelativeSource={RelativeSource Mode=TemplatedParent},Path=BreakColor}" />
+                                        <!--<ColorAnimation Duration="0:0:0.3" Storyboard.TargetName="Stroke" Storyboard.TargetProperty="Color" To="{Binding RelativeSource={RelativeSource Mode=TemplatedParent},Path=BreakColor}" />-->
+                                    </Storyboard>
+                                </VisualState>
                             </VisualStateGroup>
 
                         </VisualStateManager.VisualStateGroups>
                         <Border.Resources>
-                            <local:ProgressToPointCollectionBridge x:Name="ProgressToPointCollectionBridge"
+                            <controls:ProgressToPointCollectionBridge x:Name="ProgressToPointCollectionBridge"
                                            Progress="0">
-                                <PointCollection>21.00,12.00 20.55,12.30 20.09,12.61 19.64,12.91 19.18,13.21 18.73,13.52 18.27,13.82 17.82,14.12 17.36,14.42 16.91,14.73 16.45,15.03 16.00,15.33 15.55,15.64 15.09,15.94 14.64,16.24 14.18,16.55 13.73,16.85 13.27,17.15 12.82,17.45 12.36,17.76 11.91,18.06 11.45,18.36 11.00,18.67 10.55,18.97 10.09,19.27 9.64,19.58 9.18,19.88 8.73,20.18 8.27,20.48 7.82,20.79 7.36,21.09 6.91,21.39 6.45,21.70 6.00,22.00 6.00,21.39 6.00,20.79 6.00,20.18 6.00,19.58 6.00,18.97 6.00,18.36 6.00,17.76 6.00,17.15 6.00,16.55 6.00,15.94 6.00,15.33 6.00,14.73 6.00,14.12 6.00,13.52 6.00,12.91 6.00,12.30 6.00,11.70 6.00,11.09 6.00,10.48 6.00,9.88 6.00,9.27 6.00,8.67 6.00,8.06 6.00,7.45 6.00,6.85 6.00,6.24 6.00,5.64 6.00,5.03 6.00,4.42 6.00,3.82 6.00,3.21 6.00,2.61 6.00,2.00 6.44,2.29 6.88,2.59 7.32,2.88 7.76,3.18 8.21,3.47 8.65,3.76 9.09,4.06 9.53,4.35 9.97,4.65 10.41,4.94 10.85,5.24 11.29,5.53 11.74,5.82 12.18,6.12 12.62,6.41 13.06,6.71 13.50,7.00 13.94,7.29 14.38,7.59 14.82,7.88 15.26,8.18 15.71,8.47 16.15,8.76 16.59,9.06 17.03,9.35 17.47,9.65 17.91,9.94 18.35,10.24 18.79,10.53 19.24,10.82 19.68,11.12 20.12,11.41 20.56,11.71</PointCollection>
-                                <PointCollection>20.00,12.00 19.98,12.50 19.94,13.00 19.86,13.50 19.75,13.99 19.61,14.47 19.44,14.94 19.24,15.41 19.01,15.85 18.75,16.29 18.47,16.70 18.16,17.10 17.83,17.48 17.48,17.83 17.10,18.16 16.70,18.47 16.29,18.75 15.85,19.01 15.41,19.24 14.94,19.44 14.47,19.61 13.99,19.75 13.50,19.86 13.00,19.94 12.50,19.98 12.00,20.00 11.50,19.98 11.00,19.94 10.50,19.86 10.01,19.75 9.53,19.61 9.06,19.44 8.59,19.24 8.15,19.01 7.71,18.75 7.30,18.47 6.90,18.16 6.52,17.83 6.17,17.48 5.84,17.10 5.53,16.70 5.25,16.29 4.99,15.85 4.76,15.41 4.56,14.94 4.39,14.47 4.25,13.99 4.14,13.50 4.06,13.00 4.02,12.50 4.00,12.00 4.02,11.50 4.06,11.00 4.14,10.50 4.25,10.01 4.39,9.53 4.56,9.06 4.76,8.59 4.99,8.15 5.25,7.71 5.53,7.30 5.84,6.90 6.17,6.52 6.52,6.17 6.90,5.84 7.30,5.53 7.71,5.25 8.15,4.99 8.59,4.76 9.06,4.56 9.53,4.39 10.01,4.25 10.50,4.14 11.00,4.06 11.50,4.02 12.00,4.00 12.50,4.02 13.00,4.06 13.50,4.14 13.99,4.25 14.47,4.39 14.94,4.56 15.41,4.76 15.85,4.99 16.29,5.25 16.70,5.53 17.10,5.84 17.48,6.17 17.83,6.52 18.16,6.90 18.47,7.30 18.75,7.71 19.01,8.15 19.24,8.59 19.44,9.06 19.61,9.53 19.75,10.01 19.86,10.50 19.94,11.00 19.98,11.50</PointCollection>
-                                <PointCollection>19,19 19,19 19,19 19,19 19,19 19,19 19,19 19,19 19,19 19,19 19,19 19,19 19,19 19,19 19,19 19,19 19,19 19,19 19,19 19,19 19,19 19,19 19,19 19,19 19,19 5,19 5,19 5,19 5,19 5,19 5,19 5,19 5,19 5,19 5,19 5,19 5,19 5,19 5,19 5,19 5,19 5,19 5,19 5,19 5,19 5,19 5,19 5,19 5,19 5,19 5,5 5,5 5,5 5,5 5,5 5,5 5,5 5,5 5,5 5,5 5,5 5,5 5,5 5,5 5,5 5,5 5,5 5,5 5,5 5,5 5,5 5,5 5,5 5,5 5,5 19,5 19,5 19,5 19,5 19,5 19,5 19,5 19,5 19,5 19,5 19,5 19,5 19,5 19,5 19,5 19,5 19,5 19,5 19,5 19,5 19,5 19,5 19,5 19,5 19,5</PointCollection>
-                            </local:ProgressToPointCollectionBridge>
+                                <PointCollection>42.00,24.00 41.09,24.61 40.18,25.21 39.27,25.82 38.36,26.42 37.45,27.03 36.55,27.64 35.64,28.24 34.73,28.85 33.82,29.45 32.91,30.06 32.00,30.67 31.09,31.27 30.18,31.88 29.27,32.48 28.36,33.09 27.45,33.70 26.55,34.30 25.64,34.91 24.73,35.52 23.82,36.12 22.91,36.73 22.00,37.33 21.09,37.94 20.18,38.55 19.27,39.15 18.36,39.76 17.45,40.36 16.55,40.97 15.64,41.58 14.73,42.18 13.82,42.79 12.91,43.39 12.00,44.00 12.00,42.79 12.00,41.58 12.00,40.36 12.00,39.15 12.00,37.94 12.00,36.73 12.00,35.52 12.00,34.30 12.00,33.09 12.00,31.88 12.00,30.67 12.00,29.45 12.00,28.24 12.00,27.03 12.00,25.82 12.00,24.61 12.00,23.39 12.00,22.18 12.00,20.97 12.00,19.76 12.00,18.55 12.00,17.33 12.00,16.12 12.00,14.91 12.00,13.70 12.00,12.48 12.00,11.27 12.00,10.06 12.00,8.85 12.00,7.64 12.00,6.42 12.00,5.21 12.00,4.00 12.88,4.59 13.76,5.18 14.65,5.76 15.53,6.35 16.41,6.94 17.29,7.53 18.18,8.12 19.06,8.71 19.94,9.29 20.82,9.88 21.71,10.47 22.59,11.06 23.47,11.65 24.35,12.24 25.24,12.82 26.12,13.41 27.00,14.00 27.88,14.59 28.76,15.18 29.65,15.76 30.53,16.35 31.41,16.94 32.29,17.53 33.18,18.12 34.06,18.71 34.94,19.29 35.82,19.88 36.71,20.47 37.59,21.06 38.47,21.65 39.35,22.24 40.24,22.82 41.12,23.41</PointCollection>
+                                <PointCollection>40.00,24.00 39.97,25.00 39.87,26.01 39.72,27.00 39.50,27.98 39.22,28.94 38.88,29.89 38.48,30.81 38.02,31.71 37.51,32.57 36.94,33.40 36.33,34.20 35.66,34.95 34.95,35.66 34.20,36.33 33.40,36.94 32.57,37.51 31.71,38.02 30.81,38.48 29.89,38.88 28.94,39.22 27.98,39.50 27.00,39.72 26.01,39.87 25.00,39.97 24.00,40.00 23.00,39.97 21.99,39.87 21.00,39.72 20.02,39.50 19.06,39.22 18.11,38.88 17.19,38.48 16.29,38.02 15.43,37.51 14.60,36.94 13.80,36.33 13.05,35.66 12.34,34.95 11.67,34.20 11.06,33.40 10.49,32.57 9.98,31.71 9.52,30.81 9.12,29.89 8.78,28.94 8.50,27.98 8.28,27.00 8.13,26.01 8.03,25.00 8.00,24.00 8.03,23.00 8.13,21.99 8.28,21.00 8.50,20.02 8.78,19.06 9.12,18.11 9.52,17.19 9.98,16.29 10.49,15.43 11.06,14.60 11.67,13.80 12.34,13.05 13.05,12.34 13.80,11.67 14.60,11.06 15.43,10.49 16.29,9.98 17.19,9.52 18.11,9.12 19.06,8.78 20.02,8.50 21.00,8.28 21.99,8.13 23.00,8.03 24.00,8.00 25.00,8.03 26.01,8.13 27.00,8.28 27.98,8.50 28.94,8.78 29.89,9.12 30.81,9.52 31.71,9.98 32.57,10.49 33.40,11.06 34.20,11.67 34.95,12.34 35.66,13.05 36.33,13.80 36.94,14.60 37.51,15.43 38.02,16.29 38.48,17.19 38.88,18.11 39.22,19.06 39.50,20.02 39.72,21.00 39.87,21.99 39.97,23.00</PointCollection>
+                                <PointCollection>38,38 38,38 38,38 38,38 38,38 38,38 38,38 38,38 38,38 38,38 38,38 38,38 38,38 38,38 38,38 38,38 38,38 38,38 38,38 38,38 38,38 38,38 38,38 38,38 38,38 10,38 10,38 10,38 10,38 10,38 10,38 10,38 10,38 10,38 10,38 10,38 10,38 10,38 10,38 10,38 10,38 10,38 10,38 10,38 10,38 10,38 10,38 10,38 10,38 10,38 10,10 10,10 10,10 10,10 10,10 10,10 10,10 10,10 10,10 10,10 10,10 10,10 10,10 10,10 10,10 10,10 10,10 10,10 10,10 10,10 10,10 10,10 10,10 10,10 10,10 38,10 38,10 38,10 38,10 38,10 38,10 38,10 38,10 38,10 38,10 38,10 38,10 38,10 38,10 38,10 38,10 38,10 38,10 38,10 38,10 38,10 38,10 38,10 38,10 38,10</PointCollection>
+                            </controls:ProgressToPointCollectionBridge>
 
                         </Border.Resources>
                         <Grid>
 
                             <Viewbox Stretch="Uniform">
-                                <Grid Height="24" Width="24" RenderTransformOrigin=".5,.5">
+                                <Grid Height="48" Width="48" RenderTransformOrigin=".5,.5">
                                     <Grid.RenderTransform>
                                         <CompositeTransform x:Name="ShapeCompositeTransform"/>
                                     </Grid.RenderTransform>
-                                    <local:ButtonDecorator  x:Name="Inset"
-                                                        local:DropShadowPanel.ShadowOpacity="{TemplateBinding local:DropShadowPanel.ShadowOpacity}"
-                                                        local:DropShadowPanel.BlurRadius="{TemplateBinding local:DropShadowPanel.BlurRadius}"
-                                                        local:DropShadowPanel.Color="{TemplateBinding local:DropShadowPanel.Color}"
-                                                        local:DropShadowPanel.OffsetX="{TemplateBinding local:DropShadowPanel.OffsetX}"
-                                                        local:DropShadowPanel.OffsetY="{TemplateBinding local:DropShadowPanel.OffsetY}"
-                                                        local:DropShadowPanel.OffsetZ="{TemplateBinding local:DropShadowPanel.OffsetZ}"
-                                                        local:DropShadowPanel.IsMasked="{TemplateBinding local:DropShadowPanel.IsMasked}"
-                                                        RelativeElement="{Binding ElementName=Shape}" 
-                                                        Style="{StaticResource InsetPanel}"/>
-
-                                    <!--<Polygon Points="{Binding Source={StaticResource ProgressToPointCollectionBridge},Path=Points}"
-                                             Fill="{TemplateBinding Foreground}"
-                                             Stroke="{TemplateBinding Foreground}"
-                                             StrokeThickness="2"
-                                             Stretch="None"
-                                             StrokeEndLineCap="Round"
-                                             x:Name="Shape">
-                                     
-                                    </Polygon>-->
+                                    <controls:ButtonDecorator  x:Name="Shadow"  
+                                                            controls:DropShadowPanel.ShadowOpacity="{TemplateBinding controls:DropShadowPanel.ShadowOpacity}"
+                                                            controls:DropShadowPanel.BlurRadius="{TemplateBinding controls:DropShadowPanel.BlurRadius}"
+                                                            controls:DropShadowPanel.Color="{TemplateBinding controls:DropShadowPanel.Color}"
+                                                            controls:DropShadowPanel.OffsetX="{TemplateBinding controls:DropShadowPanel.OffsetX}"
+                                                            controls:DropShadowPanel.OffsetY="{TemplateBinding controls:DropShadowPanel.OffsetY}"
+                                                            controls:DropShadowPanel.OffsetZ="{TemplateBinding controls:DropShadowPanel.OffsetZ}"
+                                                            controls:DropShadowPanel.IsMasked="{TemplateBinding controls:DropShadowPanel.IsMasked}"
+                                                            RelativeElement="{Binding ElementName=Shape}" 
+                                                            Style="{StaticResource Shadow}"/>
+                                    <controls:OutlinePanel RelativeElement="{Binding ElementName=Shape}" x:Name="Outline"/>
 
                                     <Polygon Points="{Binding Source={StaticResource ProgressToPointCollectionBridge},Path=Points}"
-                                             StrokeThickness="2"
-                                             Stretch="None"
+                                             StrokeThickness="4"
+                                             Stretch="None" 
                                              StrokeEndLineCap="Round"
                                              x:Name="Shape">
                                         <Polygon.Fill>
-                                            <local:PomodoroButtonBrush PomodoroColor="{Binding RelativeSource={RelativeSource Mode=TemplatedParent},Path=PomodoroColor}"
-                                                                       BreakColor="{Binding RelativeSource={RelativeSource Mode=TemplatedParent},Path=BreakColor}"
-                                                                       IsInPomodoro="{Binding RelativeSource={RelativeSource Mode=TemplatedParent},Path=IsInPomodoro}"/>
+                                            <SolidColorBrush x:Name="Fill" Color="{Binding RelativeSource={RelativeSource Mode=TemplatedParent},Path=PomodoroColor}"/>
                                         </Polygon.Fill>
-                                        <Polygon.Stroke>
-                                            <local:PomodoroButtonBrush PomodoroColor="{Binding RelativeSource={RelativeSource Mode=TemplatedParent},Path=PomodoroColor}"
-                                                                       BreakColor="{Binding RelativeSource={RelativeSource Mode=TemplatedParent},Path=BreakColor}"
-                                                                       IsInPomodoro="{Binding RelativeSource={RelativeSource Mode=TemplatedParent},Path=IsInPomodoro}"/>
-                                        </Polygon.Stroke>
+                                        <!--<Polygon.Stroke>
+                                            <SolidColorBrush x:Name="Stroke" Color="{Binding RelativeSource={RelativeSource Mode=TemplatedParent},Path=PomodoroColor}"/>
+                                        </Polygon.Stroke>-->
                                     </Polygon>
-                                    
-                                    
-
-                                    <local:OutlinePanel RelativeElement="{Binding ElementName=Shape}" x:Name="Outline" />
                                 </Grid>
                             </Viewbox>
                         </Grid>

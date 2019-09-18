@@ -112,8 +112,6 @@ namespace PomodoroButtonDemo
         protected virtual void OnStateChanged(ButtonState oldValue, ButtonState newValue)
         {
             UpdateVisualStates(true);
-
-            UpdateOutlineMask();
         }
 
         protected virtual void UpdateVisualStates(bool useTransitions)
