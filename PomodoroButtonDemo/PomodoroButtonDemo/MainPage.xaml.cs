@@ -28,11 +28,44 @@ namespace PomodoroButtonDemo
     public sealed partial class MainPage : Page
     {
         private int _index;
+        ContainerVisual containerVisual;
+        Compositor compositor;
         public MainPage()
         {
             this.InitializeComponent();
+            var textVisual = ElementCompositionPreview.GetElementVisual(Tit);
+             compositor = textVisual.Compositor;
 
+             containerVisual = compositor.CreateContainerVisual();
+            var mask = Tit.GetAlphaMask();
+            for (int i = 0; i < 100; i++)
+            {
+                var maskBrush = compositor.CreateMaskBrush();
+                maskBrush.Mask = mask;
+                maskBrush.Source = compositor.CreateColorBrush(Color.FromArgb(255, 167, 71, 55));
+                var visual = compositor.CreateSpriteVisual();
+                visual.Brush = maskBrush;
+                visual.Offset = new System.Numerics.Vector3(i, i, 0);
 
+                var bindSizeAnimation = compositor.CreateExpressionAnimation("textVisual.Size");
+                bindSizeAnimation.SetReferenceParameter("textVisual", textVisual);
+                visual.StartAnimation("Size", bindSizeAnimation);
+
+                containerVisual.Children.InsertAtTop(visual);
+            }
+            
+            //containerVisual.Opacity = 0.2f;
+            ElementCompositionPreview.SetElementChildVisual(LongShadow, containerVisual);
+            Loaded += MainPage_Loaded;
+        }
+
+        private void MainPage_Loaded(object sender, RoutedEventArgs e)
+        {
+            //var clip = compositor.CreateInsetClip(0, 0, ShadowBorder.ActualSize.X, ShadowBorder.ActualSize.Y);
+            var geometry = compositor.CreateRectangleGeometry();
+            geometry.Size = ShadowBorder.ActualSize;
+            var clip = compositor.CreateGeometricClip(geometry);
+            containerVisual.Clip = clip;
         }
 
         private void OnClick(object sender, RoutedEventArgs e)
@@ -51,7 +84,7 @@ namespace PomodoroButtonDemo
             //_backgroundVisual.Brush = maskBrush;
             //_backgroundVisual.Size = new System.Numerics.Vector2(300);
             //ElementCompositionPreview.SetElementChildVisual(RR, _backgroundVisual);
-          
+
             switch (_index % 4)
             {
                 case 0:

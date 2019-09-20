@@ -205,12 +205,12 @@
             </Setter>
         </Style>
     </Page.Resources>
-    <Grid Background="Black">
+    <Grid Background="White">
         <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
 
             <local:PomodoroStateButton  Height="120" Width="120" Margin="20" local:DropShadowPanel.OffsetY="2" 
                                    Click="OnClick" />
-            
+
             <Grid>
                 <local:PomodoroStateButton  HorizontalAlignment="Center" VerticalAlignment="Center" UseLayoutRounding="True"
                                 Height="96" Width="96" IsInPomodoro="False"
@@ -246,11 +246,16 @@
                     <Rectangle Height="48" Width="48"  Stroke="White" StrokeThickness="4" />
                 </controls:DropShadowPanel>
             </Viewbox>
-
+            <Rectangle x:Name="rec" Stroke="White" StrokeThickness="4" Fill="White" Opacity="0.5"/>
+            <Grid Background="#FFE87A69" Padding="30" Margin="50" CornerRadius="10"
+ x:Name="ShadowBorder"                  >
+                <Rectangle x:Name="LongShadow" />
+                <TextBlock Text="OnePomodoro" Foreground="#FFfee8da" HorizontalAlignment="Center" FontSize="40" x:Name="Tit"/>
+            </Grid>
             <Viewbox Height="40" Width="40" HorizontalAlignment="Center" VerticalAlignment="Center">
                 <Grid Height="48" Width="48">
                     <local:DropShadowPanel RelativeElement="{Binding ElementName=rec}"  BlurRadius="29"/>
-                    <Rectangle x:Name="rec" Stroke="White" StrokeThickness="4" Fill="White" Opacity="0.5"/>
+
 
                 </Grid>
             </Viewbox>
