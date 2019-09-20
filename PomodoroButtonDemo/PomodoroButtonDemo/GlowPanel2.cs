@@ -125,13 +125,13 @@ namespace PomodoroButtonDemo
             }
         }
 
-        protected override void UpdateOutlineSize()
-        {
-            base.UpdateOutlineSize();
+        //protected override void UpdateOutlineSize()
+        //{
+        //    base.UpdateOutlineSize();
 
-            _foregroundBrush.CenterPoint = Visual.Size / 2;
-            _backgroundBrush.CenterPoint = Visual.Size / 2;
-        }
+        //    _foregroundBrush.CenterPoint = Visual.Size / 2;
+        //    _backgroundBrush.CenterPoint = Visual.Size / 2;
+        //}
 
         private void UpdateGradients()
         {
