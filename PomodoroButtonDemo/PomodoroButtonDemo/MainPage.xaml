@@ -205,25 +205,25 @@
             </Setter>
         </Style>
     </Page.Resources>
-    <Grid Background="Pink">
+    <Grid Background="Black">
         <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
 
-            <local:PomodoroStateButton  Height="120" Width="120" Margin="20" local:DropShadowPanel.OffsetY="2" PomodoroColor="Red" BreakColor="BlueViolet"
+            <local:PomodoroStateButton  Height="120" Width="120" Margin="20" local:DropShadowPanel.OffsetY="2" 
                                    Click="OnClick" />
             
             <Grid>
                 <local:PomodoroStateButton  HorizontalAlignment="Center" VerticalAlignment="Center" UseLayoutRounding="True"
-                                 PomodoroColor="Red" BreakColor="BlueViolet" Height="96" Width="96"
-                      
+                                Height="96" Width="96" IsInPomodoro="False"
+                      x:Name="Button"
                                                       local:DropShadowPanel.BlurRadius="8"
-                                                      local:DropShadowPanel.OffsetY="2"
+                                                      local:DropShadowPanel.OffsetY="2" Margin="100"
                                                       local:DropShadowPanel.ShadowOpacity="0.3"
                                    Click="OnClick" />
 
             </Grid>
 
 
-            <local:PomodoroStateButton    x:Name="Button"  Height="48" Width="48" Margin="20" local:DropShadowPanel.OffsetY="2" PomodoroColor="Red" BreakColor="BlueViolet"
+            <local:PomodoroStateButton      Height="48" Width="48" Margin="20" local:DropShadowPanel.OffsetY="2" 
                                                       local:DropShadowPanel.ShadowOpacity="0.4"
                                    local:DropShadowPanel.BlurRadius="8"
                                    Click="OnClick" />
