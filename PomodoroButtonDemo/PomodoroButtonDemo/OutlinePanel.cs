@@ -14,7 +14,7 @@ using Windows.UI.Xaml.Shapes;
 
 namespace PomodoroButtonDemo
 {
-    public class OutlinePanel : ButtonDecorator
+    public class OutlinePanel : ElementDecorator
     {
         private readonly Compositor _compositor;
         private CompositionMaskBrush _maskBrush;

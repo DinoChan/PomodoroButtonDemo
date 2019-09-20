@@ -119,10 +119,10 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ElementDecorator.cs" />
     <Compile Include="ButtonDecorator.cs" />
     <Compile Include="ButtonState.cs" />
     <Compile Include="CustomControl1.cs" />
-    <Compile Include="GlowPanel.cs" />
     <Compile Include="PomodoroButtonBrush.cs" />
     <Compile Include="InsetPanel.cs" />
     <Compile Include="DropShadowPanel.cs" />

@@ -11,7 +11,7 @@ using Windows.UI.Xaml.Hosting;
 using Windows.UI.Xaml.Shapes;
 namespace PomodoroButtonDemo
 {
-    public partial class DropShadowPanel : ButtonDecorator
+    public partial class DropShadowPanel : ElementDecorator
     {
         private readonly Compositor _compositor;
         private CompositionMaskBrush _maskBrush;
