@@ -18,6 +18,8 @@ using Windows.UI.Xaml.Navigation;
 using Windows.UI.Xaml.Shapes;
 using Microsoft.Graphics.Canvas.Effects;
 using Windows.UI.Composition;
+using System.Runtime.CompilerServices;
+using System.Numerics;
 // https://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x804 上介绍了“空白页”项模板
 
 namespace PomodoroButtonDemo
@@ -33,30 +35,44 @@ namespace PomodoroButtonDemo
         public MainPage()
         {
             this.InitializeComponent();
-            var textVisual = ElementCompositionPreview.GetElementVisual(Tit);
-             compositor = textVisual.Compositor;
 
-             containerVisual = compositor.CreateContainerVisual();
+            Loaded += MainPage_Loaded;
+            MackLongShadow(70, 0.3f);
+
+        }
+
+        private void MackLongShadow(int depth, float opacity)
+        {
+            var textVisual = ElementCompositionPreview.GetElementVisual(Tit);
+            compositor = textVisual.Compositor;
+
+            containerVisual = compositor.CreateContainerVisual();
             var mask = Tit.GetAlphaMask();
-            for (int i = 0; i < 100; i++)
+            for (int i = 0; i < depth; i++)
             {
                 var maskBrush = compositor.CreateMaskBrush();
+
+                Vector3 background = new Vector3(232, 122, 105);
+                Vector3 shadowColor = background - (background - new Vector3(0, 0, 0)) * opacity;
+                shadowColor.X = Math.Max(0, shadowColor.X);
+                shadowColor.Y = Math.Max(0, shadowColor.Y);
+                shadowColor.Z = Math.Max(0, shadowColor.Z);
+                shadowColor += (background - shadowColor) * i / depth;
                 maskBrush.Mask = mask;
-                maskBrush.Source = compositor.CreateColorBrush(Color.FromArgb(255, 167, 71, 55));
+                maskBrush.Source = compositor.CreateColorBrush(Color.FromArgb(255, (byte)shadowColor.X, (byte)shadowColor.Y, (byte)shadowColor.Z));
                 var visual = compositor.CreateSpriteVisual();
                 visual.Brush = maskBrush;
-                visual.Offset = new System.Numerics.Vector3(i, i, 0);
-
+                visual.Offset = new System.Numerics.Vector3(i + 1, i + 1, 0);
+                //visual.CompositeMode = CompositionCompositeMode.MinBlend;
                 var bindSizeAnimation = compositor.CreateExpressionAnimation("textVisual.Size");
                 bindSizeAnimation.SetReferenceParameter("textVisual", textVisual);
                 visual.StartAnimation("Size", bindSizeAnimation);
 
-                containerVisual.Children.InsertAtTop(visual);
+                containerVisual.Children.InsertAtBottom(visual);
             }
-            
+
             //containerVisual.Opacity = 0.2f;
             ElementCompositionPreview.SetElementChildVisual(LongShadow, containerVisual);
-            Loaded += MainPage_Loaded;
         }
 
         private void MainPage_Loaded(object sender, RoutedEventArgs e)
