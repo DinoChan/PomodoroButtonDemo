@@ -35,9 +35,11 @@ namespace PomodoroButtonDemo
         public MainPage()
         {
             this.InitializeComponent();
-
+            Vector3 a = new Vector3(1, 1, 1);
+            Vector3 b = new Vector3(-1, 1, 544);
+          var c=  Vector3.Max(a, b);
             Loaded += MainPage_Loaded;
-            MackLongShadow(70, 0.3f);
+            MackLongShadow(170, 0.3f);
 
         }
 
@@ -78,10 +80,10 @@ namespace PomodoroButtonDemo
         private void MainPage_Loaded(object sender, RoutedEventArgs e)
         {
             //var clip = compositor.CreateInsetClip(0, 0, ShadowBorder.ActualSize.X, ShadowBorder.ActualSize.Y);
-            var geometry = compositor.CreateRectangleGeometry();
-            geometry.Size = ShadowBorder.ActualSize;
-            var clip = compositor.CreateGeometricClip(geometry);
-            containerVisual.Clip = clip;
+            //var geometry = compositor.CreateRectangleGeometry();
+            //geometry.Size = ShadowBorder.ActualSize;
+            //var clip = compositor.CreateGeometricClip(geometry);
+            //containerVisual.Clip = clip;
         }
 
         private void OnClick(object sender, RoutedEventArgs e)
