@@ -12,7 +12,7 @@
     <Page.Resources>
 
     </Page.Resources>
-    <Grid Background="White">
+    <Grid Background="PowderBlue">
         <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
 
             <Viewbox Height="300" Width="300">
@@ -79,11 +79,11 @@
                 </controls:DropShadowPanel>
             </Viewbox>-->
             <Rectangle x:Name="rec" Stroke="White" StrokeThickness="4" Fill="White" Opacity="0.5"/>
-            <Grid Background="#FFE87A69" Padding="30" Margin="50" CornerRadius="10"
+            <StackPanel Background="#FFE87A69" Padding="0" Margin="50" CornerRadius="1"
  x:Name="ShadowBorder"                  >
                 <Rectangle x:Name="LongShadow" />
-                <TextBlock Text="OnePomodoro" Foreground="#FFfee8da" HorizontalAlignment="Center" FontSize="40" x:Name="Tit"/>
-            </Grid>
+                <TextBlock Text="1 7" Foreground="#FFfee8da"  FontSize="80" x:Name="Tit"/>
+            </StackPanel>
             <Viewbox Height="40" Width="40" HorizontalAlignment="Center" VerticalAlignment="Center">
                 <Grid Height="48" Width="48">
                     <local:DropShadowPanel RelativeElement="{Binding ElementName=rec}"  BlurRadius="29"/>
