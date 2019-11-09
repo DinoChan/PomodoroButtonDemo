@@ -18,6 +18,8 @@ using Windows.UI.Xaml.Navigation;
 using Windows.UI.Xaml.Shapes;
 using Microsoft.Graphics.Canvas.Effects;
 using Windows.UI.Composition;
+using Microsoft.Toolkit.Uwp.UI.Controls.TextToolbarSymbols;
+using System.Threading.Tasks;
 // https://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x804 上介绍了“空白页”项模板
 
 namespace PomodoroButtonDemo
@@ -30,13 +32,14 @@ namespace PomodoroButtonDemo
         private int _index;
         ContainerVisual containerVisual;
         Compositor compositor;
+        List<PomodoroStateButton> buttons = new List<PomodoroStateButton>();
         public MainPage()
         {
             this.InitializeComponent();
             var textVisual = ElementCompositionPreview.GetElementVisual(Tit);
-             compositor = textVisual.Compositor;
+            compositor = textVisual.Compositor;
 
-             containerVisual = compositor.CreateContainerVisual();
+            containerVisual = compositor.CreateContainerVisual();
             var mask = Tit.GetAlphaMask();
             for (int i = 0; i < 100; i++)
             {
@@ -53,14 +56,43 @@ namespace PomodoroButtonDemo
 
                 containerVisual.Children.InsertAtTop(visual);
             }
-            
+
             //containerVisual.Opacity = 0.2f;
             ElementCompositionPreview.SetElementChildVisual(LongShadow, containerVisual);
             Loaded += MainPage_Loaded;
+            buttons.Add(B1);
+            buttons.Add(B2);
+            buttons.Add(B3);
+            buttons.Add(B4);
+
+
         }
 
-        private void MainPage_Loaded(object sender, RoutedEventArgs e)
+
+
+        private async void MainPage_Loaded(object sender, RoutedEventArgs e)
         {
+            await Task.Delay(2000);
+
+            foreach (var button in buttons)
+            {
+                var buttonRoot = VisualTreeHelper.GetChild(button, 0) as FrameworkElement;
+                var buttonGroups = VisualStateManager.GetVisualStateGroups(buttonRoot).ToList();
+                VisualStateManager.GoToState(button,"Normal", true);
+            }
+
+            var root = VisualTreeHelper.GetChild(B4, 0) as FrameworkElement;
+            var groups = VisualStateManager.GetVisualStateGroups(root).ToList();
+            foreach (var item in groups)
+            {
+                item.CurrentStateChanged += (s, args) =>
+                {
+                    foreach (var button in buttons)
+                    {
+                        VisualStateManager.GoToState(button, args.NewState.Name, true);
+                    }
+                };
+            }
             //var clip = compositor.CreateInsetClip(0, 0, ShadowBorder.ActualSize.X, ShadowBorder.ActualSize.Y);
             var geometry = compositor.CreateRectangleGeometry();
             geometry.Size = ShadowBorder.ActualSize;
@@ -88,20 +120,35 @@ namespace PomodoroButtonDemo
             switch (_index % 4)
             {
                 case 0:
-                    Button.IsInPomodoro = true;
-                    Button.IsTimerInProgress = false;
+                    foreach (var item in buttons)
+                    {
+                        item.IsInPomodoro = true;
+                        item.IsTimerInProgress = false;
+                    }
+
                     break;
                 case 1:
-                    Button.IsInPomodoro = true;
-                    Button.IsTimerInProgress = true;
+
+                    foreach (var item in buttons)
+                    {
+                        item.IsInPomodoro = true;
+                        item.IsTimerInProgress = true;
+                    }
+
                     break;
                 case 2:
-                    Button.IsInPomodoro = false;
-                    Button.IsTimerInProgress = false;
+                    foreach (var item in buttons)
+                    {
+                        item.IsInPomodoro = false;
+                        item.IsTimerInProgress = false;
+                    }
                     break;
                 case 3:
-                    Button.IsInPomodoro = false;
-                    Button.IsTimerInProgress = true;
+                    foreach (var item in buttons)
+                    {
+                        item.IsInPomodoro = false;
+                        item.IsTimerInProgress = true;
+                    }
                     break;
 
                 default:

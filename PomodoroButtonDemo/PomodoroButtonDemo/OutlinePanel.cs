@@ -26,6 +26,7 @@ namespace PomodoroButtonDemo
             _compositor = ElementCompositionPreview.GetElementVisual(this).Compositor;
             _maskBrush = _compositor.CreateMaskBrush();
             Visual.Brush = _maskBrush;
+            _maskBrushSource = _compositor.CreateColorBrush(Color);
         }
 
         protected override void UpdateOutlineMask()

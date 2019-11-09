@@ -97,6 +97,7 @@
                         <controls:OutlinePanel x:Name="Outline" 
                                                Visibility="Collapsed"
                                                Opacity="0.5"
+                                               Color="{TemplateBinding controls:DropShadowPanel.Color}"
                                                RelativeElement="{TemplateBinding RelativeElement}">
                             <interactivity:Interaction.Behaviors>
                                 <behaviors:Scale x:Name="Scale"
@@ -490,6 +491,7 @@
                                 <VisualState x:Name="Busy">
                                     <VisualState.Setters>
                                         <Setter Target="ProgressToPointCollectionBridge.Progress" Value="1" />
+                                        <Setter Target="ShapeCompositeTransform.Rotation" Value="180" />
                                     </VisualState.Setters>
                                 </VisualState>
                             </VisualStateGroup>
@@ -543,7 +545,8 @@
                                                             controls:DropShadowPanel.IsMasked="{TemplateBinding controls:DropShadowPanel.IsMasked}"
                                                             RelativeElement="{Binding ElementName=Shape}" 
                                                             Style="{StaticResource Shadow}"/>
-                                    <controls:ButtonDecorator RelativeElement="{Binding ElementName=Shape}" x:Name="Outline" Style="{StaticResource Outline}"/>
+                                    <controls:ButtonDecorator RelativeElement="{Binding ElementName=Shape}" x:Name="Outline" Style="{StaticResource Outline}" 
+                                                              controls:DropShadowPanel.Color="{TemplateBinding OutlineColor}"/>
                                     <controls:ButtonDecorator RelativeElement="{Binding ElementName=Shape}" Style="{StaticResource Glow}"
                                                         IsInPomodoro="{TemplateBinding IsInPomodoro}"/>
                                     <Polygon Points="{Binding Source={StaticResource ProgressToPointCollectionBridge},Path=Points}"
