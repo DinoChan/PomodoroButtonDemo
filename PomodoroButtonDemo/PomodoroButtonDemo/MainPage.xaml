@@ -26,25 +26,26 @@
                         <ColumnDefinition/>
                     </Grid.ColumnDefinitions>
                     <Grid Background="White">
-                        <local:PomodoroStateButton  Click="OnClick" BreakColor="Black" PomodoroColor="Black" x:Name="B1" OutlineColor="Black"/>
+                        <local:PomodoroStateButton  Click="OnClick" BreakColor="Black" PomodoroColor="Black" x:Name="B1" OutlineColor="Black" IsInPomodoro="True"/>
                     </Grid>
                     <Grid Background="Pink" Grid.Column="1">
-                        <local:PomodoroStateButton IsInPomodoro="False" OutlineColor="Red"
+                        <local:PomodoroStateButton  OutlineColor="Red"
                                            local:DropShadowPanel.BlurRadius="8"
                                            local:DropShadowPanel.OffsetY="2" 
                                            local:DropShadowPanel.ShadowOpacity="0.3"
+                                                   IsInPomodoro="True"
                                            Click="OnClick"  x:Name="B2"/>
                     </Grid>
 
                     <Grid Background="LightBlue" Grid.Row="1">
-                        <local:PomodoroStateButton IsInPomodoro="False"
+                        <local:PomodoroStateButton IsInPomodoro="True"
                                            local:DropShadowPanel.BlurRadius="8"
                                            local:DropShadowPanel.OffsetY="2" 
                                            local:DropShadowPanel.ShadowOpacity="0.3"
                                            Click="OnClick" x:Name="B3"/>
                     </Grid>
                     <Grid Background="Black" Grid.Row="1" Grid.Column="1">
-                        <local:PomodoroStateButton IsInPomodoro="False"
+                        <local:PomodoroStateButton IsInPomodoro="True"
                                            
                                           
                                            
@@ -79,19 +80,12 @@
                 </controls:DropShadowPanel>
             </Viewbox>-->
             <Rectangle x:Name="rec" Stroke="White" StrokeThickness="4" Fill="White" Opacity="0.5"/>
-            <StackPanel Background="#FFE87A69" Padding="0" Margin="50" CornerRadius="1"
+            <StackPanel Background="#FFE87A69" Padding="28" Margin="50" CornerRadius="1"
  x:Name="ShadowBorder"                  >
                 <Rectangle x:Name="LongShadow" />
-                <TextBlock Text="1 7" Foreground="#FFfee8da"  FontSize="80" x:Name="Tit"/>
+                <TextBlock Text="One Pomodoro" Foreground="#FFfee8da"  FontSize="80" x:Name="Tit"/>
             </StackPanel>
-            <Viewbox Height="40" Width="40" HorizontalAlignment="Center" VerticalAlignment="Center">
-                <Grid Height="48" Width="48">
-                    <local:DropShadowPanel RelativeElement="{Binding ElementName=rec}"  BlurRadius="29"/>
-
-
-                </Grid>
-            </Viewbox>
-
+            
         </StackPanel>
 
     </Grid>
