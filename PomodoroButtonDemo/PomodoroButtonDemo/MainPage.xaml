@@ -15,7 +15,7 @@
     <Grid Background="PowderBlue">
         <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
 
-            <Viewbox Height="300" Width="300">
+            <Viewbox Height="600" Width="600">
                 <Grid Height="150" Width="150">
                     <Grid.RowDefinitions>
                         <RowDefinition/>
